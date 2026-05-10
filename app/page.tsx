@@ -7,6 +7,8 @@ export default function UtilityProjectManagerPrototype() {
       assigned: "Chris",
       due: "May 21",
       priority: "High",
+      budgetHours: 30,
+      actualHours: 20,
     },
     {
       id: 2,
@@ -15,6 +17,8 @@ export default function UtilityProjectManagerPrototype() {
       assigned: "Megan",
       due: "May 16",
       priority: "Medium",
+      budgetHours: 20,
+      actualHours: 15,
     },
     {
       id: 3,
@@ -23,6 +27,8 @@ export default function UtilityProjectManagerPrototype() {
       assigned: "Jacob",
       due: "May 28",
       priority: "Low",
+      budgetHours: 10,
+      actualHours: 8,
     },
   ];
 
@@ -139,6 +145,16 @@ export default function UtilityProjectManagerPrototype() {
                     <div>
                       <p className="text-zinc-500">Due Date</p>
                       <p className="font-medium mt-1">{project.due}</p>
+                    </div>
+
+                    <div>
+                      <p className="text-zinc-500">Budget Hours</p>
+                      <p className="font-medium mt-1">{project.budgetHours}</p>
+                    </div>
+
+                    <div>
+                      <p className="text-zinc-500">Actual Hours</p>
+                      <p className="font-medium mt-1">{project.actualHours}</p>
                     </div>
                   </div>
                 </div>
