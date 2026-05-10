@@ -2,9 +2,11 @@ export default function UtilityProjectManagerPrototype() {
   const projects = [
     {
       id: 1,
+      projectNumber: "1234567890",
       name: "KY-102 Gas Main Replacement",
       status: "In Progress",
-      assigned: "Chris",
+      drafter: "Chris",
+      engineer: "John",
       due: "May 21",
       priority: "High",
       budgetHours: 30,
@@ -12,9 +14,11 @@ export default function UtilityProjectManagerPrototype() {
     },
     {
       id: 2,
+      projectNumber: "1234567891",
       name: "County Road Relocation",
       status: "QA Review",
-      assigned: "Megan",
+      drafter: "Megan",
+      engineer: "Jane",
       due: "May 16",
       priority: "Medium",
       budgetHours: 20,
@@ -22,9 +26,11 @@ export default function UtilityProjectManagerPrototype() {
     },
     {
       id: 3,
+      projectNumber: "1234567892",
       name: "Service Transfer Batch",
       status: "Pending Field Data",
-      assigned: "Jacob",
+      drafter: "Jacob",
+      engineer: "Jim",
       due: "May 28",
       priority: "Low",
       budgetHours: 10,
@@ -120,7 +126,8 @@ export default function UtilityProjectManagerPrototype() {
                   className="bg-[#0d141c] border border-white/5 rounded-2xl p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4 hover:border-emerald-500/30 transition"
                 >
                   <div>
-                    <h3 className="font-semibold text-lg">{project.name}</h3>
+                    <p className="text-2xl fold-bold tracking-tight">Project # {project.projectNumber}</p>
+                    <p className="text-lg font-semibold">{project.name}</p>
                     <div className="flex flex-wrap gap-2 mt-3">
                       <span
                         className={`px-3 py-1 rounded-full text-xs border ${getStatusColor(
@@ -139,19 +146,17 @@ export default function UtilityProjectManagerPrototype() {
                   <div className="flex gap-8 text-sm">
                     <div>
                       <p className="text-zinc-500">Assigned</p>
-                      <p className="font-medium mt-1">{project.assigned}</p>
+                      <p className="font-medium mt-1">{project.drafter}</p>
                     </div>
 
                     <div>
-                      <p className="text-zinc-500">Due Date</p>
-                      <p className="font-medium mt-1">{project.due}</p>
+                      <p className="text-zinc-500">Engineer</p>
+                      <p className="font-medium mt-1">{project.engineer}</p>
                     </div>
-
                     <div>
                       <p className="text-zinc-500">Budget Hours</p>
                       <p className="font-medium mt-1">{project.budgetHours}</p>
                     </div>
-
                     <div>
                       <p className="text-zinc-500">Actual Hours</p>
                       <p className="font-medium mt-1">{project.actualHours}</p>
