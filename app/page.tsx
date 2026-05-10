@@ -73,27 +73,6 @@ export default function UtilityProjectManagerPrototype() {
   return (
     <div className="min-h-screen bg-[#0b1117] text-white p-6">
       <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div>
-            <h1 className="text-4xl font-bold tracking-tight">
-              UtilityOps Dashboard
-            </h1>
-            <p className="text-zinc-400 mt-1">
-              Internal project and workflow management prototype
-            </p>
-          </div>
-
-          <div className="flex gap-3">
-            <button className="px-4 py-2 rounded-2xl bg-zinc-800 hover:bg-zinc-700 transition">
-              Filter Projects
-            </button>
-            <button className="px-4 py-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 transition font-medium">
-              + New Project
-            </button>
-          </div>
-        </div>
-
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {stats.map((stat) => (
