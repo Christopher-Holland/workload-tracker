@@ -84,10 +84,15 @@ export default function UtilityProjectManagerPrototype() {
           <div className="xl:col-span-2 bg-[#131b24] border border-white/5 rounded-3xl p-6 shadow-lg">
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-2xl font-semibold">Priority Queue</h2>
-              <input
-                placeholder="Search projects..."
-                className="bg-[#0b1117] border border-white/10 rounded-xl px-4 py-2 text-sm outline-none focus:border-emerald-500 w-56"
-              />
+              <div className="flex items-center gap-2">
+                <button className="px-4 py-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 transition font-medium">
+                  Filters
+                </button>
+                <input
+                  placeholder="Search projects..."
+                  className="bg-[#0b1117] border border-white/10 rounded-xl px-4 py-2 text-sm outline-none focus:border-emerald-500 w-56"
+                />
+              </div>
             </div>
 
             <div className="space-y-4">
