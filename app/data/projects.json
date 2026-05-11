@@ -1,0 +1,252 @@
+[
+    {
+      "id": 1,
+      "projectNumber": "24-1001",
+      "name": "Main Street Gas Replacement",
+      "status": "In Progress",
+      "priority": "High",
+      "dueDate": "2026-05-22",
+      "budgetHours": 120,
+      "actualHours": 78
+    },
+    {
+      "id": 2,
+      "projectNumber": "24-1002",
+      "name": "Oakwood Service Transfer",
+      "status": "QA Review",
+      "priority": "Medium",
+      "dueDate": "2026-05-18",
+      "budgetHours": 60,
+      "actualHours": 54
+    },
+    {
+      "id": 3,
+      "projectNumber": "24-1003",
+      "name": "County Highway Relocation",
+      "status": "Pending Field Data",
+      "priority": "High",
+      "dueDate": "2026-06-01",
+      "budgetHours": 180,
+      "actualHours": 92
+    },
+    {
+      "id": 4,
+      "projectNumber": "24-1004",
+      "name": "River Bend Main Upgrade",
+      "status": "In Progress",
+      "priority": "Low",
+      "dueDate": "2026-05-30",
+      "budgetHours": 90,
+      "actualHours": 32
+    },
+    {
+      "id": 5,
+      "projectNumber": "24-1005",
+      "name": "South District Renewal",
+      "status": "Complete",
+      "priority": "Medium",
+      "dueDate": "2026-05-14",
+      "budgetHours": 140,
+      "actualHours": 141
+    },
+    {
+      "id": 6,
+      "projectNumber": "24-1006",
+      "name": "Pine Valley Relight",
+      "status": "In Progress",
+      "priority": "High",
+      "dueDate": "2026-05-27",
+      "budgetHours": 110,
+      "actualHours": 85
+    },
+    {
+      "id": 7,
+      "projectNumber": "24-1007",
+      "name": "Cedar Lane Extension",
+      "status": "QA Review",
+      "priority": "Low",
+      "dueDate": "2026-05-24",
+      "budgetHours": 75,
+      "actualHours": 68
+    },
+    {
+      "id": 8,
+      "projectNumber": "24-1008",
+      "name": "North Side Integrity Check",
+      "status": "Pending Approval",
+      "priority": "Medium",
+      "dueDate": "2026-06-03",
+      "budgetHours": 55,
+      "actualHours": 21
+    },
+    {
+      "id": 9,
+      "projectNumber": "24-1009",
+      "name": "Industrial Park Tie-In",
+      "status": "In Progress",
+      "priority": "High",
+      "dueDate": "2026-05-25",
+      "budgetHours": 200,
+      "actualHours": 121
+    },
+    {
+      "id": 10,
+      "projectNumber": "24-1010",
+      "name": "Maple Street Service Work",
+      "status": "Drafting",
+      "priority": "Low",
+      "dueDate": "2026-05-29",
+      "budgetHours": 40,
+      "actualHours": 12
+    },
+    {
+      "id": 11,
+      "projectNumber": "24-1011",
+      "name": "East District Replacement",
+      "status": "In Progress",
+      "priority": "High",
+      "dueDate": "2026-06-05",
+      "budgetHours": 210,
+      "actualHours": 150
+    },
+    {
+      "id": 12,
+      "projectNumber": "24-1012",
+      "name": "Green Valley Extension",
+      "status": "Pending Field Data",
+      "priority": "Medium",
+      "dueDate": "2026-06-07",
+      "budgetHours": 95,
+      "actualHours": 37
+    },
+    {
+      "id": 13,
+      "projectNumber": "24-1013",
+      "name": "Riverside Pressure Upgrade",
+      "status": "QA Review",
+      "priority": "High",
+      "dueDate": "2026-05-20",
+      "budgetHours": 130,
+      "actualHours": 126
+    },
+    {
+      "id": 14,
+      "projectNumber": "24-1014",
+      "name": "Summit Drive Relocation",
+      "status": "Drafting",
+      "priority": "Medium",
+      "dueDate": "2026-05-31",
+      "budgetHours": 70,
+      "actualHours": 18
+    },
+    {
+      "id": 15,
+      "projectNumber": "24-1015",
+      "name": "Hillcrest Main Replacement",
+      "status": "In Progress",
+      "priority": "High",
+      "dueDate": "2026-05-26",
+      "budgetHours": 160,
+      "actualHours": 101
+    },
+    {
+      "id": 16,
+      "projectNumber": "24-1016",
+      "name": "Downtown Service Batch",
+      "status": "Pending Approval",
+      "priority": "Low",
+      "dueDate": "2026-06-08",
+      "budgetHours": 50,
+      "actualHours": 20
+    },
+    {
+      "id": 17,
+      "projectNumber": "24-1017",
+      "name": "Broadway Utility Coordination",
+      "status": "In Progress",
+      "priority": "Medium",
+      "dueDate": "2026-05-28",
+      "budgetHours": 115,
+      "actualHours": 64
+    },
+    {
+      "id": 18,
+      "projectNumber": "24-1018",
+      "name": "West Ridge Reinforcement",
+      "status": "QA Review",
+      "priority": "High",
+      "dueDate": "2026-05-19",
+      "budgetHours": 145,
+      "actualHours": 143
+    },
+    {
+      "id": 19,
+      "projectNumber": "24-1019",
+      "name": "Lakeside Main Extension",
+      "status": "Drafting",
+      "priority": "Low",
+      "dueDate": "2026-06-10",
+      "budgetHours": 65,
+      "actualHours": 9
+    },
+    {
+      "id": 20,
+      "projectNumber": "24-1020",
+      "name": "Meadowbrook Service Renewal",
+      "status": "In Progress",
+      "priority": "Medium",
+      "dueDate": "2026-06-02",
+      "budgetHours": 85,
+      "actualHours": 49
+    },
+    {
+      "id": 21,
+      "projectNumber": "24-1021",
+      "name": "Airport Line Upgrade",
+      "status": "Pending Field Data",
+      "priority": "High",
+      "dueDate": "2026-06-04",
+      "budgetHours": 220,
+      "actualHours": 111
+    },
+    {
+      "id": 22,
+      "projectNumber": "24-1022",
+      "name": "Village Road Tie-In",
+      "status": "Complete",
+      "priority": "Low",
+      "dueDate": "2026-05-15",
+      "budgetHours": 45,
+      "actualHours": 43
+    },
+    {
+      "id": 23,
+      "projectNumber": "24-1023",
+      "name": "Central District Audit",
+      "status": "In Progress",
+      "priority": "Medium",
+      "dueDate": "2026-05-23",
+      "budgetHours": 100,
+      "actualHours": 56
+    },
+    {
+      "id": 24,
+      "projectNumber": "24-1024",
+      "name": "Hazard Mitigation Upgrade",
+      "status": "QA Review",
+      "priority": "High",
+      "dueDate": "2026-05-21",
+      "budgetHours": 175,
+      "actualHours": 169
+    },
+    {
+      "id": 25,
+      "projectNumber": "24-1025",
+      "name": "Valley Creek Reinforcement",
+      "status": "Drafting",
+      "priority": "Medium",
+      "dueDate": "2026-06-09",
+      "budgetHours": 80,
+      "actualHours": 26
+    }
+  ]
