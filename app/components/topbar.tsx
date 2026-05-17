@@ -1,6 +1,10 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+
 export default function Topbar() {
+    const router = useRouter();
+
     return (
         <div className="sticky top-0 z-50  border border-white/5 bg-[#131b24]/95 backdrop-blur shadow-lg">
             <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6 px-6 py-5">
@@ -16,15 +20,24 @@ export default function Topbar() {
 
                 {/* Navigation */}
                 <div className="flex flex-wrap items-center gap-2">
-                    <button className="px-4 py-2 rounded-2xl bg-emerald-600 text-white font-medium shadow-lg shadow-emerald-900/30">
+                    <button
+                        className="px-4 py-2 rounded-2xl bg-emerald-600 text-white font-medium shadow-lg shadow-emerald-900/30"
+                        onClick={() => router.push("/")}
+                    >
                         Dashboard
                     </button>
 
-                    <button className="px-4 py-2 rounded-2xl bg-[#0d141c] border border-white/5 hover:bg-zinc-800 transition text-zinc-300">
+                    <button
+                        className="px-4 py-2 rounded-2xl bg-[#0d141c] border border-white/5 hover:bg-zinc-800 transition text-zinc-300"
+                        onClick={() => router.push("/projects")}
+                    >
                         Projects
                     </button>
 
-                    <button className="px-4 py-2 rounded-2xl bg-[#0d141c] border border-white/5 hover:bg-zinc-800 transition text-zinc-300">
+                    <button
+                        className="px-4 py-2 rounded-2xl bg-[#0d141c] border border-white/5 hover:bg-zinc-800 transition text-zinc-300"
+                        onClick={() => router.push("/workload")}
+                    >
                         Workload
                     </button>
 
