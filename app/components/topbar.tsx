@@ -1,10 +1,40 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import type { ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
+
+function isActiveRoute(href: string, pathname: string) {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+function NavigationButton({
+    href,
+    children,
+}: {
+    href: string;
+    children: ReactNode;
+}) {
+    const router = useRouter();
+    const pathname = usePathname();
+    const isActive = isActiveRoute(href, pathname);
+
+    return (
+        <button
+            className={`px-4 py-2 rounded-2xl transition font-medium ${
+                isActive
+                    ? "bg-emerald-600 text-white shadow-lg shadow-emerald-900/30"
+                    : "bg-[#0d141c] border border-white/5 hover:bg-zinc-800 text-zinc-300"
+            }`}
+            onClick={() => router.push(href)}
+            aria-current={isActive ? "page" : undefined}
+        >
+            {children}
+        </button>
+    );
+}
 
 export default function Topbar() {
-    const router = useRouter();
-
     return (
         <div className="sticky top-0 z-50  border border-white/5 bg-[#131b24]/95 backdrop-blur shadow-lg">
             <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6 px-6 py-5">
@@ -20,34 +50,15 @@ export default function Topbar() {
 
                 {/* Navigation */}
                 <div className="flex flex-wrap items-center gap-2">
-                    <button
-                        className="px-4 py-2 rounded-2xl bg-emerald-600 text-white font-medium shadow-lg shadow-emerald-900/30"
-                        onClick={() => router.push("/")}
-                    >
-                        Dashboard
-                    </button>
+                    <NavigationButton href="/">Dashboard</NavigationButton>
 
-                    <button
-                        className="px-4 py-2 rounded-2xl bg-[#0d141c] border border-white/5 hover:bg-zinc-800 transition text-zinc-300"
-                        onClick={() => router.push("/projects")}
-                    >
-                        Projects
-                    </button>
+                    <NavigationButton href="/projects">Projects</NavigationButton>
 
-                    <button
-                        className="px-4 py-2 rounded-2xl bg-[#0d141c] border border-white/5 hover:bg-zinc-800 transition text-zinc-300"
-                        onClick={() => router.push("/workload")}
-                    >
-                        Workload
-                    </button>
+                    <NavigationButton href="/workload">Workload</NavigationButton>
 
-                    <button className="px-4 py-2 rounded-2xl bg-[#0d141c] border border-white/5 hover:bg-zinc-800 transition text-zinc-300">
-                        QA Review
-                    </button>
+                    <NavigationButton href="/qa-review">QA Review</NavigationButton>
 
-                    <button className="px-4 py-2 rounded-2xl bg-[#0d141c] border border-white/5 hover:bg-zinc-800 transition text-zinc-300">
-                        Reports
-                    </button>
+                    <NavigationButton href="/reports">Reports</NavigationButton>
                 </div>
 
                 {/* Right Side */}
@@ -57,13 +68,9 @@ export default function Topbar() {
                         className="bg-[#0d141c] border border-white/10 rounded-2xl px-4 py-2 text-sm outline-none focus:border-emerald-500 w-full xl:w-72"
                     />
 
-                    <button className="px-4 py-2 rounded-2xl bg-[#0d141c] border border-white/5 hover:bg-zinc-800 transition whitespace-nowrap">
-                        Alerts
-                    </button>
+                    <NavigationButton href="/alerts">Alerts</NavigationButton>
 
-                    <button className="px-4 py-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 transition font-medium whitespace-nowrap">
-                        + New Project
-                    </button>
+                    <NavigationButton href="/new-project">+ New Project</NavigationButton>
 
                     <div className="h-11 w-11 rounded-2xl bg-emerald-600 flex items-center justify-center font-semibold shadow-lg shadow-emerald-900/30">
                         CH
