@@ -1,9 +1,15 @@
+"use client";
+
+import { useMemo, useState } from "react";
 import activity from "@/app/data/activity.json";
 import drafters from "@/app/data/drafters.json";
 import engineers from "@/app/data/engineers.json";
 import projects from "@/app/data/projects.json";
 
 type Project = (typeof projects)[number];
+type PageSize = 5 | 10;
+
+const PRIORITY_ORDER: Project["priority"][] = ["High", "Medium", "Low"];
 
 function drafterForProject(projectId: number) {
   return drafters[(projectId - 1) % drafters.length];
@@ -11,6 +17,19 @@ function drafterForProject(projectId: number) {
 
 function engineerForProject(projectId: number) {
   return engineers[(projectId - 1) % engineers.length];
+}
+
+function sortByDueDate(projectsList: Project[]) {
+  return [...projectsList].sort(
+    (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+  );
+}
+
+/** High tier first, then Medium, then Low — each tier sorted by due date. */
+function buildPriorityQueue(activeProjects: Project[]) {
+  return PRIORITY_ORDER.flatMap((priority) =>
+    sortByDueDate(activeProjects.filter((p) => p.priority === priority))
+  );
 }
 
 function buildStats(projectList: Project[]) {
@@ -40,27 +59,72 @@ function buildStats(projectList: Project[]) {
   ];
 }
 
+function getStatusColor(status: string) {
+  switch (status) {
+    case "In Progress":
+      return "bg-blue-500/20 text-blue-300 border-blue-500/30";
+    case "QA Review":
+      return "bg-yellow-500/20 text-yellow-300 border-yellow-500/30";
+    case "Pending Field Data":
+      return "bg-red-500/20 text-red-300 border-red-500/30";
+    case "Complete":
+      return "bg-emerald-500/20 text-emerald-300 border-emerald-500/30";
+    case "Drafting":
+      return "bg-violet-500/20 text-violet-300 border-violet-500/30";
+    case "Pending Approval":
+      return "bg-amber-500/20 text-amber-300 border-amber-500/30";
+    default:
+      return "bg-zinc-500/20 text-zinc-300 border-zinc-500/30";
+  }
+}
+
+function getPriorityColor(priority: Project["priority"]) {
+  switch (priority) {
+    case "High":
+      return "bg-red-500/20 text-red-300 border-red-500/30";
+    case "Medium":
+      return "bg-amber-500/20 text-amber-300 border-amber-500/30";
+    case "Low":
+      return "bg-zinc-500/20 text-zinc-300 border-zinc-500/30";
+  }
+}
+
 export default function UtilityProjectManagerPrototype() {
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState<PageSize>(5);
+
   const stats = buildStats(projects);
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "In Progress":
-        return "bg-blue-500/20 text-blue-300 border-blue-500/30";
-      case "QA Review":
-        return "bg-yellow-500/20 text-yellow-300 border-yellow-500/30";
-      case "Pending Field Data":
-        return "bg-red-500/20 text-red-300 border-red-500/30";
-      case "Complete":
-        return "bg-emerald-500/20 text-emerald-300 border-emerald-500/30";
-      case "Drafting":
-        return "bg-violet-500/20 text-violet-300 border-violet-500/30";
-      case "Pending Approval":
-        return "bg-amber-500/20 text-amber-300 border-amber-500/30";
-      default:
-        return "bg-zinc-500/20 text-zinc-300 border-zinc-500/30";
-    }
-  };
+  const activeProjects = useMemo(
+    () => projects.filter((p) => p.status !== "Complete"),
+    []
+  );
+
+  const priorityQueue = useMemo(
+    () => buildPriorityQueue(activeProjects),
+    [activeProjects]
+  );
+
+  const totalPages = Math.max(1, Math.ceil(priorityQueue.length / pageSize));
+  const currentPage = Math.min(page, totalPages);
+
+  const displayedProjects = useMemo(() => {
+    const start = (currentPage - 1) * pageSize;
+    return priorityQueue.slice(start, start + pageSize);
+  }, [priorityQueue, currentPage, pageSize]);
+
+  const rangeStart =
+    priorityQueue.length === 0 ? 0 : (currentPage - 1) * pageSize + 1;
+  const rangeEnd = Math.min(currentPage * pageSize, priorityQueue.length);
+
+  function goToPage(nextPage: number) {
+    setPage(Math.max(1, Math.min(nextPage, totalPages)));
+  }
+
+  function changePageSize(size: PageSize) {
+    setPageSize(size);
+    setPage(1);
+  }
 
   return (
     <div className="min-h-screen bg-[#0b1117] text-white p-6">
@@ -82,9 +146,17 @@ export default function UtilityProjectManagerPrototype() {
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           {/* Project Table */}
           <div className="xl:col-span-2 bg-[#131b24] border border-white/5 rounded-3xl p-6 shadow-lg">
-            <div className="flex items-center justify-between mb-5">
-              <h2 className="text-2xl font-semibold">Priority Queue</h2>
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
+              <div>
+                <h2 className="text-2xl font-semibold">Priority Queue</h2>
+                <p className="text-sm text-zinc-500 mt-1">
+                  {priorityQueue.length === 0
+                    ? "No active projects"
+                    : `Showing ${rangeStart}–${rangeEnd} of ${priorityQueue.length} · High before Medium before Low`}
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                
                 <button className="px-4 py-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 transition font-medium">
                   Filters
                 </button>
@@ -96,13 +168,15 @@ export default function UtilityProjectManagerPrototype() {
             </div>
 
             <div className="space-y-4">
-              {projects.map((project) => (
+              {displayedProjects.map((project) => (
                 <div
                   key={project.id}
                   className="bg-[#0d141c] border border-white/5 rounded-2xl p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4 hover:border-emerald-500/30 transition"
                 >
                   <div>
-                    <p className="text-2xl font-bold tracking-tight">Project # {project.projectNumber}</p>
+                    <p className="text-2xl font-bold tracking-tight">
+                      Project # {project.projectNumber}
+                    </p>
                     <p className="text-lg font-semibold">{project.name}</p>
                     <div className="flex flex-wrap gap-2 mt-3">
                       <span
@@ -112,8 +186,11 @@ export default function UtilityProjectManagerPrototype() {
                       >
                         {project.status}
                       </span>
-
-                      <span className="px-3 py-1 rounded-full text-xs bg-zinc-800 text-zinc-300 border border-white/5">
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs border ${getPriorityColor(
+                          project.priority
+                        )}`}
+                      >
                         {project.priority} Priority
                       </span>
                     </div>
@@ -124,7 +201,6 @@ export default function UtilityProjectManagerPrototype() {
                       <p className="text-zinc-500">Assigned</p>
                       <p className="font-medium mt-1">{drafterForProject(project.id)}</p>
                     </div>
-
                     <div>
                       <p className="text-zinc-500">Engineer</p>
                       <p className="font-medium mt-1">{engineerForProject(project.id)}</p>
@@ -141,6 +217,30 @@ export default function UtilityProjectManagerPrototype() {
                 </div>
               ))}
             </div>
+
+            {priorityQueue.length > pageSize && (
+              <div className="flex items-center justify-between mt-6 pt-5 border-t border-white/5">
+                <button
+                  onClick={() => goToPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="px-4 py-2 rounded-2xl bg-[#0d141c] border border-white/5 text-zinc-300 hover:bg-zinc-800 transition disabled:opacity-40 disabled:pointer-events-none"
+                >
+                  Previous
+                </button>
+
+                <p className="text-sm text-zinc-400">
+                  Page {currentPage} of {totalPages}
+                </p>
+
+                <button
+                  onClick={() => goToPage(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="px-4 py-2 rounded-2xl bg-[#0d141c] border border-white/5 text-zinc-300 hover:bg-zinc-800 transition disabled:opacity-40 disabled:pointer-events-none"
+                >
+                  Next
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Activity Feed */}
