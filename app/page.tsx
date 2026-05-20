@@ -152,7 +152,7 @@ export default function UtilityProjectManagerPrototype() {
                 <p className="text-sm text-zinc-500 mt-1">
                   {priorityQueue.length === 0
                     ? "No active projects"
-                    : `Showing ${rangeStart}–${rangeEnd} of ${priorityQueue.length} · High before Medium before Low`}
+                    : `Showing ${rangeStart}–${rangeEnd} of ${priorityQueue.length}`}
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-2">
