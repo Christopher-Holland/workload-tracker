@@ -5,6 +5,7 @@ import activity from "@/app/data/activity.json";
 import drafters from "@/app/data/drafters.json";
 import engineers from "@/app/data/engineers.json";
 import projects from "@/app/data/projects.json";
+import { formatDueDate, parseDueDate } from "@/app/lib/dates";
 
 type Project = (typeof projects)[number];
 type PageSize = 5 | 10;
@@ -21,7 +22,7 @@ function engineerForProject(projectId: number) {
 
 function sortByDueDate(projectsList: Project[]) {
   return [...projectsList].sort(
-    (a, b) => new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+    (a, b) => parseDueDate(a.dueDate).getTime() - parseDueDate(b.dueDate).getTime()
   );
 }
 
@@ -39,7 +40,7 @@ function buildStats(projectList: Project[]) {
   const activeProjects = projectList.filter((p) => p.status !== "Complete").length;
   const projectsWaitingQa = projectList.filter((p) => p.status === "QA Review").length;
   const overdueTasks = projectList.filter((p) => {
-    const due = new Date(p.dueDate);
+    const due = parseDueDate(p.dueDate);
     due.setHours(0, 0, 0, 0);
     return due < today;
   }).length;
@@ -157,13 +158,13 @@ export default function UtilityProjectManagerPrototype() {
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 
-                <button className="px-4 py-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 transition font-medium">
-                  Filters
-                </button>
                 <input
                   placeholder="Search projects..."
                   className="bg-[#0b1117] border border-white/10 rounded-xl px-4 py-2 text-sm outline-none focus:border-emerald-500 w-56"
                 />
+                <button className="px-4 py-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 transition font-medium">
+                  Filters
+                </button>
               </div>
             </div>
 
@@ -212,6 +213,10 @@ export default function UtilityProjectManagerPrototype() {
                     <div>
                       <p className="text-zinc-500">Actual Hours</p>
                       <p className="font-medium mt-1">{project.actualHours}</p>
+                    </div>
+                    <div>
+                      <p className="text-zinc-500">Due Date</p>
+                      <p className="font-medium mt-1">{formatDueDate(project.dueDate)}</p>
                     </div>
                   </div>
                 </div>

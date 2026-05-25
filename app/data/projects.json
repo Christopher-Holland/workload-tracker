@@ -145,7 +145,7 @@
       "name": "Hillcrest Main Replacement",
       "status": "In Progress",
       "priority": "High",
-      "dueDate": "2026-05-26",
+      "dueDate": "05-26-2026",
       "budgetHours": 160,
       "actualHours": 101
     },
@@ -155,7 +155,7 @@
       "name": "Downtown Service Batch",
       "status": "Pending Approval",
       "priority": "Low",
-      "dueDate": "2026-06-08",
+      "dueDate": "06-08-2026",
       "budgetHours": 50,
       "actualHours": 20
     },
@@ -165,7 +165,7 @@
       "name": "Broadway Utility Coordination",
       "status": "In Progress",
       "priority": "Medium",
-      "dueDate": "2026-05-28",
+      "dueDate": "05-28-2026",
       "budgetHours": 115,
       "actualHours": 64
     },
@@ -175,7 +175,7 @@
       "name": "West Ridge Reinforcement",
       "status": "QA Review",
       "priority": "High",
-      "dueDate": "2026-05-19",
+      "dueDate": "05-19-2026",
       "budgetHours": 145,
       "actualHours": 143
     },
@@ -185,7 +185,7 @@
       "name": "Lakeside Main Extension",
       "status": "Drafting",
       "priority": "Low",
-      "dueDate": "2026-06-10",
+      "dueDate": "06-10-2026",
       "budgetHours": 65,
       "actualHours": 9
     },
@@ -195,7 +195,7 @@
       "name": "Meadowbrook Service Renewal",
       "status": "In Progress",
       "priority": "Medium",
-      "dueDate": "2026-06-02",
+      "dueDate": "06-02-2026",
       "budgetHours": 85,
       "actualHours": 49
     },
@@ -205,7 +205,7 @@
       "name": "Airport Line Upgrade",
       "status": "Pending Field Data",
       "priority": "High",
-      "dueDate": "2026-06-04",
+      "dueDate": "06-04-2026",
       "budgetHours": 220,
       "actualHours": 111
     },
@@ -215,7 +215,7 @@
       "name": "Village Road Tie-In",
       "status": "Complete",
       "priority": "Low",
-      "dueDate": "2026-05-15",
+      "dueDate": "05-15-2026",
       "budgetHours": 45,
       "actualHours": 43
     },
@@ -225,7 +225,7 @@
       "name": "Central District Audit",
       "status": "In Progress",
       "priority": "Medium",
-      "dueDate": "2026-05-23",
+      "dueDate": "05-23-2026",
       "budgetHours": 100,
       "actualHours": 56
     },
@@ -235,7 +235,7 @@
       "name": "Hazard Mitigation Upgrade",
       "status": "QA Review",
       "priority": "High",
-      "dueDate": "2026-05-21",
+      "dueDate": "05-21-2026",
       "budgetHours": 175,
       "actualHours": 169
     },
@@ -245,7 +245,7 @@
       "name": "Valley Creek Reinforcement",
       "status": "Drafting",
       "priority": "Medium",
-      "dueDate": "2026-06-09",
+      "dueDate": "06-09-2026",
       "budgetHours": 80,
       "actualHours": 26
     }
