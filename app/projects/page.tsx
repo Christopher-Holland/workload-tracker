@@ -32,8 +32,8 @@ export default function ProjectsPage() {
         if (!query) return projects;
 
         return projects.filter((project) => {
-            const drafter = drafterForProject(project.id).toLowerCase();
-            const engineer = engineerForProject(project.id).toLowerCase();
+            const drafter = drafterForProject(project).toLowerCase();
+            const engineer = engineerForProject(project).toLowerCase();
             return (
                 project.projectNumber.toLowerCase().includes(query) ||
                 project.name.toLowerCase().includes(query) ||
@@ -121,10 +121,10 @@ export default function ProjectsPage() {
                                                     {project.name}
                                                 </td>
                                                 <td className="px-4 py-4 text-zinc-300 whitespace-nowrap">
-                                                    {drafterForProject(project.id)}
+                                                    {drafterForProject(project)}
                                                 </td>
                                                 <td className="px-4 py-4 text-zinc-300 whitespace-nowrap">
-                                                    {engineerForProject(project.id)}
+                                                    {engineerForProject(project)}
                                                 </td>
                                                 <td className="px-4 py-4">
                                                     <span

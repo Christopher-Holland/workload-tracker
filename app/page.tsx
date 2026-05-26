@@ -45,7 +45,7 @@ function buildStats(projectList: Project[]) {
   const inProgressDrafters = new Set(
     projectList
       .filter((p) => p.status === "In Progress")
-      .map((p) => drafterForProject(p.id))
+      .map((p) => drafterForProject(p))
   );
   const availableDesigners = drafters.filter((d) => !inProgressDrafters.has(d)).length;
 
@@ -79,8 +79,8 @@ export default function UtilityProjectManagerPrototype() {
     if (!query) return priorityQueue;
 
     return priorityQueue.filter((project) => {
-      const drafter = drafterForProject(project.id).toLowerCase();
-      const engineer = engineerForProject(project.id).toLowerCase();
+      const drafter = drafterForProject(project).toLowerCase();
+      const engineer = engineerForProject(project).toLowerCase();
       return (
         project.projectNumber.toLowerCase().includes(query) ||
         project.name.toLowerCase().includes(query) ||
@@ -203,11 +203,11 @@ export default function UtilityProjectManagerPrototype() {
                   <div className="flex gap-8 text-sm">
                     <div>
                       <p className="text-zinc-500">Assigned</p>
-                      <p className="font-medium mt-1">{drafterForProject(project.id)}</p>
+                      <p className="font-medium mt-1">{drafterForProject(project)}</p>
                     </div>
                     <div>
                       <p className="text-zinc-500">Engineer</p>
-                      <p className="font-medium mt-1">{engineerForProject(project.id)}</p>
+                      <p className="font-medium mt-1">{engineerForProject(project)}</p>
                     </div>
                     <div>
                       <p className="text-zinc-500">Budget Hours</p>

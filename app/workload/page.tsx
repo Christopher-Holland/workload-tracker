@@ -23,7 +23,7 @@ export default function WorkloadPage() {
   const assignedProjects = useMemo(() => {
     if (!user) return [];
     return projectsData.filter((project) =>
-      isProjectAssignedToUser(project.id, user)
+      isProjectAssignedToUser(project, user)
     );
   }, [user]);
 
@@ -44,8 +44,8 @@ export default function WorkloadPage() {
     if (!query) return assignedProjects;
 
     return assignedProjects.filter((project) => {
-      const drafter = drafterForProject(project.id).toLowerCase();
-      const engineer = engineerForProject(project.id).toLowerCase();
+      const drafter = drafterForProject(project).toLowerCase();
+      const engineer = engineerForProject(project).toLowerCase();
       return (
         project.projectNumber.toLowerCase().includes(query) ||
         project.name.toLowerCase().includes(query) ||
@@ -63,9 +63,17 @@ export default function WorkloadPage() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Workload</h1>
           <p className="text-zinc-400 mt-1 text-sm">
-            {user
-              ? `Projects assigned to ${user.name}`
-              : "Sign in to view your assigned projects"}
+            {user ? (
+              <>
+                Projects assigned to{" "}
+                <span className="font-bold text-white">
+                  {user.name}
+                </span>{" "}
+                ({user.title})
+              </>
+            ) : (
+              "Sign in to view your assigned projects"
+            )}
           </p>
         </div>
 
@@ -152,10 +160,10 @@ export default function WorkloadPage() {
                           {project.name}
                         </td>
                         <td className="px-4 py-4 text-zinc-300 whitespace-nowrap">
-                          {drafterForProject(project.id)}
+                          {drafterForProject(project)}
                         </td>
                         <td className="px-4 py-4 text-zinc-300 whitespace-nowrap">
-                          {engineerForProject(project.id)}
+                          {engineerForProject(project)}
                         </td>
                         <td className="px-4 py-4">
                           <span

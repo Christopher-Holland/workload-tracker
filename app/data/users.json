@@ -3,138 +3,161 @@
     "id": 1,
     "name": "Chris Holland",
     "email": "cholland@engineering.com",
+    "title": "Senior CAD Technician",
     "role": "drafter"
   },
   {
     "id": 2,
     "name": "Megan Ross",
     "email": "mross@engineering.com",
+    "title": "CAD Technician",
     "role": "drafter"
   },
   {
     "id": 3,
     "name": "Jacob Turner",
     "email": "jturner@engineering.com",
+    "title": "CAD Technician",
     "role": "drafter"
   },
   {
     "id": 4,
     "name": "Tyler Reed",
     "email": "treed@engineering.com",
+    "title": "CAD Technician",
     "role": "drafter"
   },
   {
     "id": 5,
     "name": "Samantha Cole",
     "email": "scole@engineering.com",
+    "title": "CAD Technician",
     "role": "drafter"
   },
   {
     "id": 6,
     "name": "Brandon Hayes",
     "email": "bhayes@engineering.com",
+    "title": "CAD Technician",
     "role": "drafter"
   },
   {
     "id": 7,
     "name": "Olivia Brooks",
     "email": "obrooks@engineering.com",
+    "title": "CAD Technician",
     "role": "drafter"
   },
   {
     "id": 8,
     "name": "Nathan Price",
     "email": "nprice@engineering.com",
+    "title": "CAD Technician",
     "role": "drafter"
   },
   {
     "id": 9,
     "name": "Emily Foster",
     "email": "efoster@engineering.com",
+    "title": "CAD Technician",
     "role": "drafter"
   },
   {
     "id": 10,
     "name": "Ryan Cooper",
     "email": "rcooper@engineering.com",
+    "title": "CAD Specialist",
     "role": "drafter"
   },
   {
     "id": 11,
     "name": "Michael Carter",
     "email": "mcarter@engineering.com",
+    "title": "Engineer",
     "role": "engineer"
   },
   {
     "id": 12,
     "name": "Daniel Harris",
     "email": "dharris@engineering.com",
+    "title": "Engineer",
     "role": "engineer"
   },
   {
     "id": 13,
     "name": "Lauren Mitchell",
     "email": "lmitchell@engineering.com",
+    "title": "Design Engineer",
     "role": "engineer"
   },
   {
     "id": 14,
     "name": "Kevin Murphy",
     "email": "kmurphy@engineering.com",
+    "title": "Design Engineer",
     "role": "engineer"
   },
   {
     "id": 15,
     "name": "Rachel Simmons",
     "email": "rsimmons@engineering.com",
+    "title": "Design Engineer",
     "role": "engineer"
   },
   {
     "id": 16,
     "name": "Andrew Bell",
     "email": "abell@engineering.com",
+    "title": "Design Engineer",
     "role": "engineer"
   },
   {
     "id": 17,
     "name": "Jessica Walters",
     "email": "jwalters@engineering.com",
+    "title": "Design Engineer",
     "role": "engineer"
   },
   {
     "id": 18,
     "name": "David Collins",
     "email": "dcollins@engineering.com",
+    "title": "Design Engineer",
     "role": "engineer"
   },
   {
     "id": 19,
     "name": "Brittany Hall",
     "email": "bhall@engineering.com",
+    "title": "Design Engineer",
     "role": "engineer"
   },
   {
     "id": 20,
     "name": "Eric Bennett",
     "email": "ebennett@engineering.com",
+    "title": "Lead Engineer",
     "role": "engineer"
   },
   {
     "id": 21,
     "name": "Alyssa Nguyen",
     "email": "anguyen@engineering.com",
+    "title": "Design Coordinator",
     "role": "design coordinator"
   },
   {
     "id": 22,
     "name": "Mark Delgado",
     "email": "mdelgado@engineering.com",
+    "title": "Design Coordinator",
     "role": "design coordinator"
   },
   {
     "id": 23,
     "name": "Priya Shah",
     "email": "pshah@engineering.com",
+    "title": "Design Coordinator",
     "role": "design coordinator"
   }
 ]
