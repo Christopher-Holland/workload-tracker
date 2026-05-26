@@ -1,62 +1,16 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import drafters from "@/app/data/drafters.json";
-import engineers from "@/app/data/engineers.json";
 import projects from "@/app/data/projects.json";
+import { getHoursColor } from "@/app/components/getHoursColor";
+import { getHoursPct } from "@/app/components/getHoursPct";
+import { getPriorityColor } from "@/app/components/getPriorityColor";
+import { getStatusColor } from "@/app/components/getStatusColor";
+import {
+    drafterForProject,
+    engineerForProject,
+} from "@/app/components/projectAssignments";
 import { formatDueDate } from "@/app/lib/dates";
-
-type Project = (typeof projects)[number];
-
-function drafterForProject(projectId: number) {
-    return drafters[(projectId - 1) % drafters.length];
-}
-
-function engineerForProject(projectId: number) {
-    return engineers[(projectId - 1) % engineers.length];
-}
-
-function getStatusColor(status: string) {
-    switch (status) {
-        case "In Progress":
-            return "bg-blue-500/20 text-blue-300 border-blue-500/30";
-        case "QA Review":
-            return "bg-yellow-500/20 text-yellow-300 border-yellow-500/30";
-        case "Pending Field Data":
-            return "bg-red-500/20 text-red-300 border-red-500/30";
-        case "Complete":
-            return "bg-emerald-500/20 text-emerald-300 border-emerald-500/30";
-        case "Drafting":
-            return "bg-violet-500/20 text-violet-300 border-violet-500/30";
-        case "Pending Approval":
-            return "bg-amber-500/20 text-amber-300 border-amber-500/30";
-        default:
-            return "bg-zinc-500/20 text-zinc-300 border-zinc-500/30";
-    }
-}
-
-function getPriorityColor(priority: Project["priority"]) {
-    switch (priority) {
-        case "High":
-            return "bg-red-500/20 text-red-300 border-red-500/30";
-        case "Medium":
-            return "bg-amber-500/20 text-amber-300 border-amber-500/30";
-        case "Low":
-            return "bg-zinc-500/20 text-zinc-300 border-zinc-500/30";
-    }
-}
-
-function getHoursPct(actualHours: number, budgetHours: number) {
-    return Math.round((actualHours / budgetHours) * 100);
-}
-
-function getHoursColor(hoursPct: number) {
-    if (hoursPct >= 100) return "text-red-400";
-    if (hoursPct >= 80) return "text-yellow-400";
-    if (hoursPct >= 60) return "text-amber-400";
-    if (hoursPct === 0) return "text-blue-400";
-    return "text-green-400";
-}
 
 export default function ProjectsPage() {
     const [search, setSearch] = useState("");

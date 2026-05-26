@@ -2,6 +2,12 @@
 
 import type { ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import users from "@/app/data/users.json";
+
+type User = (typeof users)[number];
+
+/** Logged-in user id (prototype — replace with auth/session later). */
+const CURRENT_USER_ID = 1;
 
 function isActiveRoute(href: string, pathname: string) {
     if (href === "/") return pathname === "/";
@@ -34,7 +40,23 @@ function NavigationButton({
     );
 }
 
+function currentUser(userId: number = CURRENT_USER_ID): User | undefined {
+    return users.find((u) => u.id === userId);
+}
+
+function getInitials(name: string): string {
+    const parts = name.trim().split(/\s+/).filter(Boolean);
+    if (parts.length === 0) return "?";
+    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+    const first = parts[0][0] ?? "";
+    const last = parts[parts.length - 1][0] ?? "";
+    return `${first}${last}`.toUpperCase();
+}
+
 export default function Topbar() {
+    const user = currentUser();
+    const initials = user ? getInitials(user.name) : "??";
+
     return (
         <div className="sticky top-0 z-50  border border-white/5 bg-[#131b24]/95 backdrop-blur shadow-lg">
             <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6 px-6 py-5">
@@ -74,8 +96,14 @@ export default function Topbar() {
 
                     <NavigationButton href="/new-project">+ New Project</NavigationButton>
 
-                    <div className="h-11 w-11 rounded-2xl bg-emerald-600 flex items-center justify-center font-semibold shadow-lg shadow-emerald-900/30">
-                        CH
+                    <div
+                        className="h-11 w-11 rounded-2xl bg-emerald-600 flex items-center justify-center font-semibold shadow-lg shadow-emerald-900/30"
+                        title={user?.name ?? "Unknown user"}
+                        aria-label={
+                            user ? `Signed in as ${user.name}` : "Unknown user"
+                        }
+                    >
+                        {initials}
                     </div>
                 </div>
             </div>
