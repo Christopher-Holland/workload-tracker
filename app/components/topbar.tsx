@@ -2,12 +2,7 @@
 
 import type { ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import users from "@/app/data/users.json";
-
-type User = (typeof users)[number];
-
-/** Logged-in user id (prototype — replace with auth/session later). */
-const CURRENT_USER_ID = 1;
+import { getCurrentUser, getInitials } from "@/app/lib/currentUser";
 
 function isActiveRoute(href: string, pathname: string) {
     if (href === "/") return pathname === "/";
@@ -40,21 +35,8 @@ function NavigationButton({
     );
 }
 
-function currentUser(userId: number = CURRENT_USER_ID): User | undefined {
-    return users.find((u) => u.id === userId);
-}
-
-function getInitials(name: string): string {
-    const parts = name.trim().split(/\s+/).filter(Boolean);
-    if (parts.length === 0) return "?";
-    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-    const first = parts[0][0] ?? "";
-    const last = parts[parts.length - 1][0] ?? "";
-    return `${first}${last}`.toUpperCase();
-}
-
 export default function Topbar() {
-    const user = currentUser();
+    const user = getCurrentUser();
     const initials = user ? getInitials(user.name) : "??";
 
     return (
