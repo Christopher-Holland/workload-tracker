@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import activity from "@/app/data/activity.json";
 import drafters from "@/app/data/drafters.json";
 import engineers from "@/app/data/engineers.json";
@@ -93,6 +93,7 @@ function getPriorityColor(priority: Project["priority"]) {
 export default function UtilityProjectManagerPrototype() {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState<PageSize>(5);
+  const [search, setSearch] = useState("");
 
   const stats = buildStats(projects);
 
@@ -106,17 +107,39 @@ export default function UtilityProjectManagerPrototype() {
     [activeProjects]
   );
 
-  const totalPages = Math.max(1, Math.ceil(priorityQueue.length / pageSize));
+  const filteredPriorityQueue = useMemo(() => {
+    const query = search.trim().toLowerCase();
+    if (!query) return priorityQueue;
+
+    return priorityQueue.filter((project) => {
+      const drafter = drafterForProject(project.id).toLowerCase();
+      const engineer = engineerForProject(project.id).toLowerCase();
+      return (
+        project.projectNumber.toLowerCase().includes(query) ||
+        project.name.toLowerCase().includes(query) ||
+        project.status.toLowerCase().includes(query) ||
+        project.priority.toLowerCase().includes(query) ||
+        drafter.includes(query) ||
+        engineer.includes(query)
+      );
+    });
+  }, [priorityQueue, search]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [search]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredPriorityQueue.length / pageSize));
   const currentPage = Math.min(page, totalPages);
 
   const displayedProjects = useMemo(() => {
     const start = (currentPage - 1) * pageSize;
-    return priorityQueue.slice(start, start + pageSize);
-  }, [priorityQueue, currentPage, pageSize]);
+    return filteredPriorityQueue.slice(start, start + pageSize);
+  }, [filteredPriorityQueue, currentPage, pageSize]);
 
   const rangeStart =
-    priorityQueue.length === 0 ? 0 : (currentPage - 1) * pageSize + 1;
-  const rangeEnd = Math.min(currentPage * pageSize, priorityQueue.length);
+    filteredPriorityQueue.length === 0 ? 0 : (currentPage - 1) * pageSize + 1;
+  const rangeEnd = Math.min(currentPage * pageSize, filteredPriorityQueue.length);
 
   function goToPage(nextPage: number) {
     setPage(Math.max(1, Math.min(nextPage, totalPages)));
@@ -151,16 +174,22 @@ export default function UtilityProjectManagerPrototype() {
               <div>
                 <h2 className="text-2xl font-semibold">Priority Queue</h2>
                 <p className="text-sm text-zinc-500 mt-1">
-                  {priorityQueue.length === 0
-                    ? "No active projects"
-                    : `Showing ${rangeStart}–${rangeEnd} of ${priorityQueue.length}`}
+                  {filteredPriorityQueue.length === 0
+                    ? search.trim()
+                      ? "No projects match your search"
+                      : "No active projects"
+                    : `Showing ${rangeStart}–${rangeEnd} of ${filteredPriorityQueue.length}${
+                        search.trim() ? ` (${priorityQueue.length} total in queue)` : ""
+                      }`}
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 
                 <input
-                  placeholder="Search projects..."
-                  className="bg-[#0b1117] border border-white/10 rounded-xl px-4 py-2 text-sm outline-none focus:border-emerald-500 w-56"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search by number, name, drafter, status..."
+                  className="bg-[#0b1117] border border-white/10 rounded-xl px-4 py-2 text-sm outline-none focus:border-emerald-500 w-56 sm:w-72"
                 />
                 <button className="px-4 py-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 transition font-medium">
                   Filters
@@ -169,7 +198,14 @@ export default function UtilityProjectManagerPrototype() {
             </div>
 
             <div className="space-y-4">
-              {displayedProjects.map((project) => (
+              {filteredPriorityQueue.length === 0 ? (
+                <p className="text-zinc-500 text-sm py-12 text-center">
+                  {search.trim()
+                    ? "No projects match your search"
+                    : "No active projects"}
+                </p>
+              ) : (
+                displayedProjects.map((project) => (
                 <div
                   key={project.id}
                   className="bg-[#0d141c] border border-white/5 rounded-2xl p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4 hover:border-emerald-500/30 transition"
@@ -220,10 +256,11 @@ export default function UtilityProjectManagerPrototype() {
                     </div>
                   </div>
                 </div>
-              ))}
+                ))
+              )}
             </div>
 
-            {priorityQueue.length > pageSize && (
+            {filteredPriorityQueue.length > pageSize && (
               <div className="flex items-center justify-between mt-6 pt-5 border-t border-white/5">
                 <button
                   onClick={() => goToPage(currentPage - 1)}
