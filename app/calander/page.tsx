@@ -29,7 +29,7 @@ const events = [
 
 export default function Calendar() {
     return (
-        <main className="p-6">
+        <main className="p-6 min-h-screen bg-[#131b24] text-white">
             <div className="rounded-2xl border bg-[#131b24] p-4 shadow-sm">
                 <h1 className="mb-4 text-2xl font-bold">Team Calendar</h1>
 
