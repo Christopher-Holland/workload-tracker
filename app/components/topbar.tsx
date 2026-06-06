@@ -2,7 +2,8 @@
 
 import type { ReactNode } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { getCurrentUser, getInitials } from "@/app/lib/currentUser";
+import UserMenu from "@/app/components/userMenu";
+import { getCurrentUser } from "@/app/lib/currentUser";
 
 function isActiveRoute(href: string, pathname: string) {
     if (href === "/") return pathname === "/";
@@ -37,7 +38,6 @@ function NavigationButton({
 
 export default function Topbar() {
     const user = getCurrentUser();
-    const initials = user ? getInitials(user.name) : "??";
 
     return (
         <div className="sticky top-0 z-50 border border-border bg-panel/95 backdrop-blur shadow-lg">
@@ -69,15 +69,7 @@ export default function Topbar() {
                     <NavigationButton href="/alerts">Alerts</NavigationButton>
                     <NavigationButton href="/new-project">+ New Project</NavigationButton>
 
-                    <div
-                        className="h-11 w-11 rounded-2xl bg-accent flex items-center justify-center font-semibold shadow-lg shadow-accent-shadow/30"
-                        title={user?.name ?? "Unknown user"}
-                        aria-label={
-                            user ? `Signed in as ${user.name}` : "Unknown user"
-                        }
-                    >
-                        {initials}
-                    </div>
+                    <UserMenu user={user} />
                 </div>
             </div>
         </div>
