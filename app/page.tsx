@@ -118,16 +118,16 @@ export default function UtilityProjectManagerPrototype() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0b1117] text-white p-6">
+    <div className="app-page">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {stats.map((stat) => (
             <div
               key={stat.title}
-              className="bg-[#131b24] border border-white/5 rounded-3xl p-5 shadow-lg"
+              className="app-stat-card"
             >
-              <p className="text-zinc-400 text-sm">{stat.title}</p>
+              <p className="text-muted text-sm">{stat.title}</p>
               <h2 className="text-3xl font-bold mt-2">{stat.value}</h2>
             </div>
           ))}
@@ -136,11 +136,11 @@ export default function UtilityProjectManagerPrototype() {
         {/* Main Grid */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           {/* Project Table */}
-          <div className="xl:col-span-2 bg-[#131b24] border border-white/5 rounded-3xl p-6 shadow-lg">
+          <div className="xl:col-span-2 app-panel">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
               <div>
                 <h2 className="text-2xl font-semibold">Priority Queue</h2>
-                <p className="text-sm text-zinc-500 mt-1">
+                <p className="text-sm text-faint mt-1">
                   {filteredPriorityQueue.length === 0
                     ? search.trim()
                       ? "No projects match your search"
@@ -156,9 +156,9 @@ export default function UtilityProjectManagerPrototype() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Search by number, name, drafter, status..."
-                  className="bg-[#0b1117] border border-white/10 rounded-xl px-4 py-2 text-sm outline-none focus:border-emerald-500 w-56 sm:w-72"
+                  className="app-input w-56 sm:w-72"
                 />
-                <button className="px-4 py-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 transition font-medium">
+                <button className="app-btn-primary">
                   Filters
                 </button>
               </div>
@@ -166,7 +166,7 @@ export default function UtilityProjectManagerPrototype() {
 
             <div className="space-y-4">
               {filteredPriorityQueue.length === 0 ? (
-                <p className="text-zinc-500 text-sm py-12 text-center">
+                <p className="text-faint text-sm py-12 text-center">
                   {search.trim()
                     ? "No projects match your search"
                     : "No active projects"}
@@ -175,7 +175,7 @@ export default function UtilityProjectManagerPrototype() {
                 displayedProjects.map((project) => (
                 <div
                   key={project.id}
-                  className="bg-[#0d141c] border border-white/5 rounded-2xl p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4 hover:border-emerald-500/30 transition"
+                  className="app-surface-card p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-4 hover:border-accent-hover/30 transition"
                 >
                   <div>
                     <p className="text-2xl font-bold tracking-tight">
@@ -202,23 +202,23 @@ export default function UtilityProjectManagerPrototype() {
 
                   <div className="flex gap-8 text-sm">
                     <div>
-                      <p className="text-zinc-500">Assigned</p>
+                      <p className="text-faint">Assigned</p>
                       <p className="font-medium mt-1">{drafterForProject(project)}</p>
                     </div>
                     <div>
-                      <p className="text-zinc-500">Engineer</p>
+                      <p className="text-faint">Engineer</p>
                       <p className="font-medium mt-1">{engineerForProject(project)}</p>
                     </div>
                     <div>
-                      <p className="text-zinc-500">Budget Hours</p>
+                      <p className="text-faint">Budget Hours</p>
                       <p className="font-medium mt-1">{project.budgetHours}</p>
                     </div>
                     <div>
-                      <p className="text-zinc-500">Actual Hours</p>
+                      <p className="text-faint">Actual Hours</p>
                       <p className="font-medium mt-1">{project.actualHours}</p>
                     </div>
                     <div>
-                      <p className="text-zinc-500">Due Date</p>
+                      <p className="text-faint">Due Date</p>
                       <p className="font-medium mt-1">{formatDueDate(project.dueDate)}</p>
                     </div>
                   </div>
@@ -228,23 +228,23 @@ export default function UtilityProjectManagerPrototype() {
             </div>
 
             {filteredPriorityQueue.length > pageSize && (
-              <div className="flex items-center justify-between mt-6 pt-5 border-t border-white/5">
+              <div className="flex items-center justify-between mt-6 pt-5 border-t border-border">
                 <button
                   onClick={() => goToPage(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="px-4 py-2 rounded-2xl bg-[#0d141c] border border-white/5 text-zinc-300 hover:bg-zinc-800 transition disabled:opacity-40 disabled:pointer-events-none"
+                  className="app-btn-secondary"
                 >
                   Previous
                 </button>
 
-                <p className="text-sm text-zinc-400">
+                <p className="text-sm text-muted">
                   Page {currentPage} of {totalPages}
                 </p>
 
                 <button
                   onClick={() => goToPage(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className="px-4 py-2 rounded-2xl bg-[#0d141c] border border-white/5 text-zinc-300 hover:bg-zinc-800 transition disabled:opacity-40 disabled:pointer-events-none"
+                  className="app-btn-secondary"
                 >
                   Next
                 </button>
@@ -253,20 +253,20 @@ export default function UtilityProjectManagerPrototype() {
           </div>
 
           {/* Activity Feed */}
-          <div className="bg-[#131b24] border border-white/5 rounded-3xl p-6 shadow-lg">
+          <div className="app-panel">
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-2xl font-semibold">Team Activity</h2>
-              <span className="text-xs text-emerald-400">LIVE</span>
+              <span className="text-xs text-accent-light">LIVE</span>
             </div>
 
             <div className="space-y-4 text-sm">
               {activity.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-[#0d141c] rounded-2xl p-4 border border-white/5"
+                  className="app-surface-card p-4"
                 >
                   <p>{item.message}</p>
-                  <p className="text-zinc-500 mt-2">{item.time}</p>
+                  <p className="text-faint mt-2">{item.time}</p>
                 </div>
               ))}
             </div>

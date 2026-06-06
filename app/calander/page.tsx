@@ -29,12 +29,12 @@ const events = [
 
 export default function Calendar() {
     return (
-        <main className="p-6 min-h-screen bg-[#131b24] text-white">
-            <div className="rounded-2xl border bg-[#131b24] p-4 shadow-sm">
+        <main className="app-page">
+            <div className="app-panel">
                 <h1 className="mb-4 text-2xl font-bold">Team Calendar</h1>
 
                 <div className="flex justify-end mb-4">
-                    <button className="bg-emerald-600 text-white px-4 py-1 rounded-2xl flex items-center gap-2 hover:bg-emerald-700 transition-colors">
+                    <button className="app-btn-primary flex items-center gap-2 px-4 py-1">
                         <PlusIcon className="w-4 h-4" />
                         Add Event
                     </button>

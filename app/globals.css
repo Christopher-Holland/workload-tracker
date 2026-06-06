@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --page: #0b1117;
+  --panel: #131b24;
+  --surface: #0d141c;
+  --foreground: #ffffff;
+  --muted: #a1a1aa;
+  --faint: #71717a;
+  --subtle: #d4d4d8;
+  --border: rgb(255 255 255 / 0.05);
+  --border-strong: rgb(255 255 255 / 0.1);
+  --accent: #059669;
+  --accent-hover: #10b981;
+  --accent-light: #34d399;
+  --accent-shadow: #064e3b;
+  --hover: #27272a;
 }
 
 @theme inline {
-  --color-background: var(--background);
+  --color-page: var(--page);
+  --color-panel: var(--panel);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-light: var(--accent-light);
+  --color-accent-shadow: var(--accent-shadow);
+  --color-hover: var(--hover);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--page);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .app-page {
+    @apply min-h-screen p-6;
+  }
+
+  .app-stat-card {
+    @apply bg-panel border border-border rounded-3xl p-5 shadow-lg;
+  }
+
+  .app-panel {
+    @apply bg-panel border border-border rounded-3xl p-6 shadow-lg;
+  }
+
+  .app-surface-card {
+    @apply bg-surface border border-border rounded-2xl;
+  }
+
+  .app-input {
+    @apply bg-page border border-border-strong rounded-xl px-4 py-2 text-sm outline-none focus:border-accent-hover;
+  }
+
+  .app-btn-primary {
+    @apply px-4 py-2 rounded-2xl bg-accent hover:bg-accent-hover transition font-medium;
+  }
+
+  .app-btn-secondary {
+    @apply px-4 py-2 rounded-2xl bg-surface border border-border text-subtle hover:bg-hover transition disabled:opacity-40 disabled:pointer-events-none;
+  }
 }

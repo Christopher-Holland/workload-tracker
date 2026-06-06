@@ -58,15 +58,15 @@ export default function WorkloadPage() {
   }, [assignedProjects, search]);
 
   return (
-    <div className="min-h-screen bg-[#0b1117] text-white p-6">
+    <div className="app-page">
       <div className="max-w-7xl mx-auto space-y-6">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Workload</h1>
-          <p className="text-zinc-400 mt-1 text-sm">
+          <p className="text-muted mt-1 text-sm">
             {user ? (
               <>
                 Projects assigned to{" "}
-                <span className="font-bold text-white">
+                <span className="font-bold text-foreground">
                   {user.name}
                 </span>{" "}
                 ({user.title})
@@ -81,19 +81,19 @@ export default function WorkloadPage() {
           {stats.map((stat) => (
             <div
               key={stat.title}
-              className="bg-[#131b24] border border-white/5 rounded-3xl p-5 shadow-lg"
+              className="app-stat-card"
             >
-              <p className="text-zinc-400 text-sm">{stat.title}</p>
+              <p className="text-muted text-sm">{stat.title}</p>
               <h2 className="text-3xl font-bold mt-2">{stat.value}</h2>
             </div>
           ))}
         </div>
 
-        <div className="bg-[#131b24] border border-white/5 rounded-3xl p-6 shadow-lg">
+        <div className="app-panel">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-5">
             <div>
               <h2 className="text-2xl font-semibold">My Projects</h2>
-              <p className="text-sm text-zinc-500 mt-1">
+              <p className="text-sm text-faint mt-1">
                 {user
                   ? `Showing ${filteredProjects.length} of ${assignedProjects.length} assigned`
                   : "No user session"}
@@ -104,18 +104,18 @@ export default function WorkloadPage() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search your projects..."
-                className="bg-[#0b1117] border border-white/10 rounded-xl px-4 py-2 text-sm outline-none focus:border-emerald-500 w-full sm:w-72"
+                className="app-input w-full sm:w-72"
               />
-              <button className="px-4 py-2 rounded-2xl bg-emerald-600 hover:bg-emerald-500 transition font-medium whitespace-nowrap">
+              <button className="app-btn-primary whitespace-nowrap">
                 Filters
               </button>
             </div>
           </div>
 
-          <div className="overflow-x-auto rounded-2xl border border-white/5">
+          <div className="overflow-x-auto rounded-2xl border border-border">
             <table className="w-full border-collapse text-left text-sm">
               <thead>
-                <tr className="bg-[#0d141c] text-zinc-400 border-b border-white/5">
+                <tr className="bg-surface text-muted border-b border-border">
                   <th className="px-4 py-3 font-medium">Project #</th>
                   <th className="px-4 py-3 font-medium">Project Name</th>
                   <th className="px-4 py-3 font-medium">Drafter</th>
@@ -129,13 +129,13 @@ export default function WorkloadPage() {
               <tbody>
                 {!user ? (
                   <tr>
-                    <td colSpan={8} className="px-4 py-12 text-center text-zinc-500">
+                    <td colSpan={8} className="px-4 py-12 text-center text-faint">
                       Unable to load user session
                     </td>
                   </tr>
                 ) : filteredProjects.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="px-4 py-12 text-center text-zinc-500">
+                    <td colSpan={8} className="px-4 py-12 text-center text-faint">
                       {search.trim()
                         ? "No assigned projects match your search"
                         : "No projects assigned to you"}
@@ -151,18 +151,18 @@ export default function WorkloadPage() {
                     return (
                       <tr
                         key={project.id}
-                        className="border-t border-white/5 hover:bg-[#0d141c]/60 transition"
+                        className="border-t border-border hover:bg-surface/60 transition"
                       >
-                        <td className="px-4 py-4 font-semibold text-white whitespace-nowrap">
+                        <td className="px-4 py-4 font-semibold text-foreground whitespace-nowrap">
                           {project.projectNumber}
                         </td>
                         <td className="px-4 py-4 font-medium max-w-xs">
                           {project.name}
                         </td>
-                        <td className="px-4 py-4 text-zinc-300 whitespace-nowrap">
+                        <td className="px-4 py-4 text-subtle whitespace-nowrap">
                           {drafterForProject(project)}
                         </td>
-                        <td className="px-4 py-4 text-zinc-300 whitespace-nowrap">
+                        <td className="px-4 py-4 text-subtle whitespace-nowrap">
                           {engineerForProject(project)}
                         </td>
                         <td className="px-4 py-4">
@@ -183,11 +183,11 @@ export default function WorkloadPage() {
                             {project.priority}
                           </span>
                         </td>
-                        <td className="px-4 py-4 text-zinc-300 whitespace-nowrap">
+                        <td className="px-4 py-4 text-subtle whitespace-nowrap">
                           {formatDueDate(project.dueDate)}
                         </td>
                         <td className="px-4 py-4 whitespace-nowrap">
-                          <span className="text-zinc-300">
+                          <span className="text-subtle">
                             {project.actualHours} / {project.budgetHours}
                           </span>
                           <span
