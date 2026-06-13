@@ -3,6 +3,7 @@
 import { useEffect, useState, type ComponentProps } from "react";
 import { Calendar, Clock } from "lucide-react";
 import projects from "@/app/data/projects.json";
+import { X } from "lucide-react";
 
 export interface CalendarEvent {
   id: string;
@@ -106,9 +107,12 @@ export default function AddEventModal({
         className="app-panel w-full max-w-md"
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 id="add-event-title" className="text-xl font-semibold mb-4">
-          Add Event
-        </h2>
+        <div className="flex justify-between items-center mb-4">
+            <h2 id="add-event-title" className="text-xl font-semibold">
+                Add Event
+            </h2>
+            <button type="button" onClick={onClose} className="app-btn-secondary"><X className="w-4 h-4" /></button>
+        </div>
 
         <input
           className="app-input w-full mb-3"

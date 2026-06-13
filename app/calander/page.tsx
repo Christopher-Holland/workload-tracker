@@ -7,6 +7,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { PlusIcon } from "lucide-react";
 import AddEventModal, { type CalendarEvent } from "@/app/components/addEventModal";
+import EditEventModal from "@/app/components/editEventModal";
 import projects from "@/app/data/projects.json";
 import { calendarThemeVars, applyCalendarDarkTheme } from "@/app/lib/calendarTheme";
 
@@ -58,9 +59,33 @@ function toFullCalendarEvent(event: CalendarEvent): FullCalendarEvent {
   };
 }
 
+function fromFullCalendarEvent(fcEvent: FullCalendarEvent): CalendarEvent {
+  const [date, timePart] = fcEvent.start.includes("T")
+    ? fcEvent.start.split("T")
+    : [fcEvent.start, ""];
+
+  const startTime = timePart ? timePart.slice(0, 5) : "";
+
+  let endTime = "";
+  if (fcEvent.end?.includes("T")) {
+    endTime = fcEvent.end.split("T")[1]?.slice(0, 5) ?? "";
+  }
+
+  return {
+    id: fcEvent.id,
+    title: fcEvent.title,
+    date,
+    startTime,
+    endTime,
+    projectId: fcEvent.extendedProps?.projectId,
+    notes: fcEvent.extendedProps?.notes,
+  };
+}
+
 export default function Calendar() {
   const [events, setEvents] = useState<FullCalendarEvent[]>(initialEvents);
   const [isAddEventModalOpen, setIsAddEventModalOpen] = useState(false);
+  const [editingEvent, setEditingEvent] = useState<CalendarEvent | null>(null);
   const calendarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -83,6 +108,21 @@ export default function Calendar() {
 
   function handleSaveEvent(calendarEvent: CalendarEvent) {
     setEvents((prev) => [...prev, toFullCalendarEvent(calendarEvent)]);
+  }
+
+  function handleUpdateEvent(calendarEvent: CalendarEvent) {
+    setEvents((prev) =>
+      prev.map((event) =>
+        event.id === calendarEvent.id
+          ? toFullCalendarEvent(calendarEvent)
+          : event
+      )
+    );
+  }
+
+  function handleDeleteEvent(eventId: string) {
+    setEvents((prev) => prev.filter((event) => event.id !== eventId));
+    setEditingEvent(null);
   }
 
   return (
@@ -118,7 +158,18 @@ export default function Calendar() {
           height="auto"
           selectable
           eventClick={(info) => {
-            alert(`Clicked: ${info.event.title}`);
+            setEditingEvent(
+              fromFullCalendarEvent({
+                id: info.event.id,
+                title: info.event.title,
+                start: info.event.startStr,
+                end: info.event.endStr || undefined,
+                extendedProps: info.event.extendedProps as Record<
+                  string,
+                  string | undefined
+                >,
+              })
+            );
           }}
           dateClick={(info) => {
             alert(`Selected date: ${info.dateStr}`);
@@ -131,6 +182,15 @@ export default function Calendar() {
         isOpen={isAddEventModalOpen}
         onClose={() => setIsAddEventModalOpen(false)}
         onSave={handleSaveEvent}
+        projects={projects}
+      />
+
+      <EditEventModal
+        isOpen={editingEvent !== null}
+        event={editingEvent}
+        onClose={() => setEditingEvent(null)}
+        onSave={handleUpdateEvent}
+        onDelete={handleDeleteEvent}
         projects={projects}
       />
     </main>
