@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -8,6 +8,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 import { PlusIcon } from "lucide-react";
 import AddEventModal, { type CalendarEvent } from "@/app/components/addEventModal";
 import projects from "@/app/data/projects.json";
+import { calendarThemeVars, applyCalendarDarkTheme } from "@/app/lib/calendarTheme";
 
 type FullCalendarEvent = {
   id: string;
@@ -60,6 +61,25 @@ function toFullCalendarEvent(event: CalendarEvent): FullCalendarEvent {
 export default function Calendar() {
   const [events, setEvents] = useState<FullCalendarEvent[]>(initialEvents);
   const [isAddEventModalOpen, setIsAddEventModalOpen] = useState(false);
+  const calendarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = calendarRef.current;
+    if (!container) return;
+
+    applyCalendarDarkTheme(container);
+
+    const observer = new MutationObserver(() => {
+      applyCalendarDarkTheme(container);
+    });
+
+    observer.observe(container, { childList: true, subtree: true });
+
+    return () => {
+      observer.disconnect();
+      document.getElementById("fc-dark-theme-overrides")?.remove();
+    };
+  }, []);
 
   function handleSaveEvent(calendarEvent: CalendarEvent) {
     setEvents((prev) => [...prev, toFullCalendarEvent(calendarEvent)]);
@@ -81,7 +101,12 @@ export default function Calendar() {
           </button>
         </div>
 
-        <FullCalendar
+        <div
+          ref={calendarRef}
+          className="app-calendar"
+          style={calendarThemeVars}
+        >
+          <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
           headerToolbar={{
@@ -98,7 +123,8 @@ export default function Calendar() {
           dateClick={(info) => {
             alert(`Selected date: ${info.dateStr}`);
           }}
-        />
+          />
+        </div>
       </div>
 
       <AddEventModal
