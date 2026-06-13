@@ -22,15 +22,15 @@ const ALL_ROLES = USER_ROLES;
 export const MAIN_NAV_ITEMS: NavItem[] = [
   { href: "/", label: "Dashboard", roles: ALL_ROLES },
   { href: "/projects", label: "Projects", roles: ALL_ROLES },
-  { href: "/workload", label: "Workload", roles: ALL_ROLES },
+  { href: "/workload", label: "Workload", roles: ["Administrator", "Design Coordinator", "Drafter"] },
   { href: "/qa-review", label: "QA Review", roles: ["Administrator", "Design Coordinator", "Engineer"] },
-  { href: "/reports", label: "Reports", roles: ALL_ROLES },
+  { href: "/reports", label: "Reports", roles: ["Administrator", "Design Coordinator", "Engineer"] },
   { href: "/calander", label: "Calander", roles: ALL_ROLES },
 ];
 
 export const ACTION_NAV_ITEMS: NavItem[] = [
   { href: "/alerts", label: "Alerts", roles: ALL_ROLES },
-  { href: "/new-project", label: "+ New Project", roles: ALL_ROLES },
+  { href: "/new-project", label: "+ New Project", roles: ["Administrator", "Design Coordinator"] },
 ];
 
 export function canAccessNavItem(

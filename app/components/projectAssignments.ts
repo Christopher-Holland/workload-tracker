@@ -1,5 +1,6 @@
 import projects from "@/app/data/projects.json";
 import users from "@/app/data/users.json";
+import type { User } from "@/app/lib/currentUser";
 
 export type Project = (typeof projects)[number];
 
@@ -15,11 +16,8 @@ export function engineerForProject(project: Project): string {
   return getUserName(project.engineerId);
 }
 
-export function isProjectAssignedToUser(
-  project: Project,
-  user: { id: number; role: string }
-): boolean {
-  if (user.role === "drafter") return project.drafterId === user.id;
-  if (user.role === "engineer") return project.engineerId === user.id;
+export function isProjectAssignedToUser(project: Project, user: User): boolean {
+  if (user.role === "Drafter") return project.drafterId === user.id;
+  if (user.role === "Engineer") return project.engineerId === user.id;
   return false;
 }
