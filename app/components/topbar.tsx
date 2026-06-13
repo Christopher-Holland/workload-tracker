@@ -47,7 +47,7 @@ export default function Topbar() {
                         UtilityOps
                     </h1>
                     <p className="text-muted mt-1 text-sm">
-                        Coordinator Workflow Dashboard
+                        {user?.role} Workflow Dashboard
                     </p>
                 </div>
 
