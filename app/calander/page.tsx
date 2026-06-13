@@ -1,64 +1,112 @@
-// app/calendar/page.tsx
 "use client";
 
+import { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { PlusIcon } from "lucide-react";
+import AddEventModal, { type CalendarEvent } from "@/app/components/addEventModal";
+import projects from "@/app/data/projects.json";
 
-const events = [
-    {
-        title: "Chris PTO",
-        start: "2026-06-03",
-        end: "2026-06-06",
-        extendedProps: {
-            type: "pto",
-            person: "Chris",
-        },
+type FullCalendarEvent = {
+  id: string;
+  title: string;
+  start: string;
+  end?: string;
+  extendedProps?: Record<string, string | undefined>;
+};
+
+const initialEvents: FullCalendarEvent[] = [
+  {
+    id: "1",
+    title: "Chris PTO",
+    start: "2026-06-03",
+    end: "2026-06-06",
+    extendedProps: {
+      type: "pto",
+      person: "Chris",
     },
-    {
-        title: "WGL Permit Review",
-        start: "2026-06-04T10:00:00",
-        extendedProps: {
-            type: "project",
-            status: "In Review",
-        },
+  },
+  {
+    id: "2",
+    title: "WGL Permit Review",
+    start: "2026-06-04T10:00:00",
+    extendedProps: {
+      type: "project",
+      status: "In Review",
     },
+  },
 ];
 
+function toFullCalendarEvent(event: CalendarEvent): FullCalendarEvent {
+  const start = event.startTime
+    ? `${event.date}T${event.startTime}`
+    : event.date;
+  const end = event.endTime ? `${event.date}T${event.endTime}` : undefined;
+
+  return {
+    id: event.id,
+    title: event.title,
+    start,
+    ...(end && { end }),
+    extendedProps: {
+      projectId: event.projectId,
+      notes: event.notes,
+    },
+  };
+}
+
 export default function Calendar() {
-    return (
-        <main className="app-page">
-            <div className="app-panel">
-                <h1 className="mb-4 text-2xl font-bold">Team Calendar</h1>
+  const [events, setEvents] = useState<FullCalendarEvent[]>(initialEvents);
+  const [isAddEventModalOpen, setIsAddEventModalOpen] = useState(false);
 
-                <div className="flex justify-end mb-4">
-                    <button className="app-btn-primary flex items-center gap-2 px-4 py-1">
-                        <PlusIcon className="w-4 h-4" />
-                        Add Event
-                    </button>
-                </div>
+  function handleSaveEvent(calendarEvent: CalendarEvent) {
+    setEvents((prev) => [...prev, toFullCalendarEvent(calendarEvent)]);
+  }
 
-                <FullCalendar
-                    plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-                    initialView="dayGridMonth"
-                    headerToolbar={{
-                        left: "prev,next today",
-                        center: "title",
-                        right: "dayGridMonth,timeGridWeek,timeGridDay",
-                    }}
-                    events={events}
-                    height="auto"
-                    selectable
-                    eventClick={(info) => {
-                        alert(`Clicked: ${info.event.title}`);
-                    }}
-                    dateClick={(info) => {
-                        alert(`Selected date: ${info.dateStr}`);
-                    }}
-                />
-            </div>
-        </main>
-    );
+  return (
+    <main className="app-page">
+      <div className="app-panel">
+        <h1 className="mb-4 text-2xl font-bold">Team Calendar</h1>
+
+        <div className="flex justify-end mb-4">
+          <button
+            type="button"
+            onClick={() => setIsAddEventModalOpen(true)}
+            className="app-btn-primary flex items-center gap-2 px-4 py-1"
+          >
+            <PlusIcon className="w-4 h-4" />
+            Add Event
+          </button>
+        </div>
+
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          initialView="dayGridMonth"
+          headerToolbar={{
+            left: "prev,next today",
+            center: "title",
+            right: "dayGridMonth,timeGridWeek,timeGridDay",
+          }}
+          events={events}
+          height="auto"
+          selectable
+          eventClick={(info) => {
+            alert(`Clicked: ${info.event.title}`);
+          }}
+          dateClick={(info) => {
+            alert(`Selected date: ${info.dateStr}`);
+          }}
+        />
+      </div>
+
+      <AddEventModal
+        isOpen={isAddEventModalOpen}
+        onClose={() => setIsAddEventModalOpen(false)}
+        onSave={handleSaveEvent}
+        projects={projects}
+      />
+    </main>
+  );
 }

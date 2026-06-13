@@ -40,6 +40,36 @@ body {
   background: var(--page);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  color-scheme: dark;
+}
+
+/* Date/time inputs — native picker icons are invisible on dark UI in WebKit */
+.app-datetime-input {
+  color-scheme: dark;
+  padding-right: 2.75rem;
+}
+
+.app-datetime-input::-webkit-datetime-edit,
+.app-datetime-input::-webkit-datetime-edit-fields-wrapper,
+.app-datetime-input::-webkit-datetime-edit-text,
+.app-datetime-input::-webkit-datetime-edit-month-field,
+.app-datetime-input::-webkit-datetime-edit-day-field,
+.app-datetime-input::-webkit-datetime-edit-year-field,
+.app-datetime-input::-webkit-datetime-edit-hour-field,
+.app-datetime-input::-webkit-datetime-edit-minute-field,
+.app-datetime-input::-webkit-datetime-edit-ampm-field {
+  color: var(--foreground);
+}
+
+.app-datetime-input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
 }
 
 @layer components {
@@ -60,7 +90,7 @@ body {
   }
 
   .app-input {
-    @apply bg-page border border-border-strong rounded-xl px-4 py-2 text-sm outline-none focus:border-accent-hover;
+    @apply bg-page border border-border-strong rounded-xl px-4 py-2 text-sm text-foreground outline-none focus:border-accent-hover;
   }
 
   .app-btn-primary {
