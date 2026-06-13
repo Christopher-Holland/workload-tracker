@@ -159,5 +159,12 @@
     "email": "pshah@engineering.com",
     "title": "Design Coordinator",
     "role": "Design Coordinator"
+  },
+  {
+    "id": 24,
+    "name": "Chris Holland",
+    "email": "cholland@engineering.com",
+    "title": "Application Administrator",
+    "role": "Administrator"
   }
 ]
