@@ -16,6 +16,10 @@ export function engineerForProject(project: Project): string {
   return getUserName(project.engineerId);
 }
 
+export function getProjectById(projectId: number): Project | undefined {
+  return projects.find((project) => project.id === projectId);
+}
+
 export function isProjectAssignedToUser(project: Project, user: User): boolean {
   if (user.role === "Drafter") return project.drafterId === user.id;
   if (user.role === "Engineer") return project.engineerId === user.id;

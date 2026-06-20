@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import projects from "@/app/data/projects.json";
 import { getHoursColor } from "@/app/components/getHoursColor";
 import { getHoursPct } from "@/app/components/getHoursPct";
@@ -13,6 +14,7 @@ import {
 import { formatDueDate } from "@/app/lib/dates";
 
 export default function ProjectsPage() {
+    const router = useRouter();
     const [search, setSearch] = useState("");
 
     const stats = useMemo(() => {
@@ -112,7 +114,8 @@ export default function ProjectsPage() {
                                         return (
                                             <tr
                                                 key={project.id}
-                                                className="border-t border-border hover:bg-surface/60 transition"
+                                                onClick={() => router.push(`/projects/${project.id}`)}
+                                                className="border-t border-border hover:bg-surface/60 transition cursor-pointer"
                                             >
                                                 <td className="px-4 py-4 font-semibold text-foreground whitespace-nowrap">
                                                     {project.projectNumber}
