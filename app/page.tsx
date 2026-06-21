@@ -44,7 +44,11 @@ function buildStats(projectList: Project[]) {
 
   const inProgressDrafters = new Set(
     projectList
-      .filter((p) => p.status === "In Progress")
+      .filter((p) =>
+        ["Preliminary", "1st round close outs", "final closeouts"].includes(
+          p.status
+        )
+      )
       .map((p) => drafterForProject(p))
   );
   const availableDesigners = drafters.filter((d) => !inProgressDrafters.has(d)).length;

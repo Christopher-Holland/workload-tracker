@@ -5,13 +5,13 @@ import { ArrowLeft } from "lucide-react";
 import { getHoursColor } from "@/app/components/getHoursColor";
 import { getHoursPct } from "@/app/components/getHoursPct";
 import { getPriorityColor } from "@/app/components/getPriorityColor";
-import { getStatusColor } from "@/app/components/getStatusColor";
 import {
   drafterForProject,
   engineerForProject,
-  getProjectById,
 } from "@/app/components/projectAssignments";
+import { getProjectById } from "@/app/lib/projects";
 import { formatDueDate } from "@/app/lib/dates";
+import ProjectStatusSelect from "@/app/components/projectStatusSelect";
 
 function DetailField({
   label,
@@ -47,11 +47,19 @@ export default async function ProjectPage({
   }
 
   const hoursPct = getHoursPct(project.actualHours, project.budgetHours);
+  const engineerHoursPct = getHoursPct(
+    project.engineerActualHours,
+    project.engineerBudgetHours
+  );
   const remainingHours = Math.max(project.budgetHours - project.actualHours, 0);
+  const remainingEngineerHours = Math.max(
+    project.engineerBudgetHours - project.engineerActualHours,
+    0
+  );
 
   return (
     <div className="app-page">
-      <div className="max-w-5xl mx-auto space-y-6">
+      <div className="max-w-7xl mx-auto space-y-6">
         <Link
           href="/projects"
           className="inline-flex items-center gap-2 text-sm text-muted hover:text-foreground transition"
@@ -61,28 +69,13 @@ export default async function ProjectPage({
         </Link>
 
         <div>
-          <p className="text-sm text-muted">{project.projectNumber}</p>
+          <p className="text-sm text-muted">{project.name}</p>
           <h1 className="text-3xl font-bold tracking-tight mt-1">
-            {project.name}
+            {project.projectNumber}
           </h1>
         </div>
 
-        <div className="flex flex-wrap gap-2">
-          <span
-            className={`inline-block px-3 py-1 rounded-full text-xs border ${getStatusColor(
-              project.status
-            )}`}
-          >
-            {project.status}
-          </span>
-          <span
-            className={`inline-block px-3 py-1 rounded-full text-xs border ${getPriorityColor(
-              project.priority
-            )}`}
-          >
-            {project.priority}
-          </span>
-        </div>
+        
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="app-stat-card">
@@ -92,15 +85,19 @@ export default async function ProjectPage({
             </h2>
           </div>
           <div className="app-stat-card">
-            <p className="text-muted text-sm">Budget Hours</p>
-            <h2 className="text-2xl font-bold mt-2">{project.budgetHours}</h2>
+            <p className="text-muted text-sm">Drafter Hours</p>
+            <h2 className="text-2xl font-bold mt-2">
+              {project.actualHours} / {project.budgetHours}
+            </h2>
           </div>
           <div className="app-stat-card">
-            <p className="text-muted text-sm">Actual Hours</p>
-            <h2 className="text-2xl font-bold mt-2">{project.actualHours}</h2>
+            <p className="text-muted text-sm">Engineer Hours</p>
+            <h2 className="text-2xl font-bold mt-2">
+              {project.engineerActualHours} / {project.engineerBudgetHours}
+            </h2>
           </div>
           <div className="app-stat-card">
-            <p className="text-muted text-sm">Hours Used</p>
+            <p className="text-muted text-sm">Drafter Hours Used</p>
             <h2 className={`text-2xl font-bold mt-2 ${getHoursColor(hoursPct)}`}>
               {hoursPct}%
             </h2>
@@ -117,17 +114,45 @@ export default async function ProjectPage({
             <DetailField label="Engineer">
               {engineerForProject(project)}
             </DetailField>
-            <DetailField label="Status">{project.status}</DetailField>
-            <DetailField label="Priority">{project.priority}</DetailField>
+            <DetailField label="Status">
+              <ProjectStatusSelect
+                key={project.status}
+                projectId={project.id}
+                status={project.status}
+                className="w-full sm:w-auto min-w-[12rem]"
+              />
+            </DetailField>
+
+            <DetailField label="Priority">
+              <span
+                className={`inline-block px-3 py-1 rounded-full text-xs border ${getPriorityColor(
+                  project.priority
+                )}`}
+              >
+                {project.priority}
+              </span>
+            </DetailField>
             <DetailField label="Due Date">
               {formatDueDate(project.dueDate)}
             </DetailField>
-            <DetailField label="Remaining Hours">{remainingHours}</DetailField>
+            <DetailField label="Drafter Remaining Hours">
+              {remainingHours}
+            </DetailField>
+            <DetailField label="Engineer Remaining Hours">
+              {remainingEngineerHours}
+            </DetailField>
           </div>
+
+          {project.notes && (
+            <div className="app-surface-card p-4">
+              <p className="text-sm text-muted mb-1">Notes</p>
+              <p className="text-foreground">{project.notes}</p>
+            </div>
+          )}
 
           <div className="app-surface-card p-4">
             <div className="flex items-center justify-between text-sm mb-2">
-              <span className="text-muted">Hours Progress</span>
+              <span className="text-muted">Drafter Hours Progress</span>
               <span className={`font-medium ${getHoursColor(hoursPct)}`}>
                 {project.actualHours} / {project.budgetHours} ({hoursPct}%)
               </span>
@@ -142,6 +167,28 @@ export default async function ProjectPage({
                       : "bg-accent"
                 }`}
                 style={{ width: `${Math.min(hoursPct, 100)}%` }}
+              />
+            </div>
+          </div>
+
+          <div className="app-surface-card p-4">
+            <div className="flex items-center justify-between text-sm mb-2">
+              <span className="text-muted">Engineer Hours Progress</span>
+              <span className={`font-medium ${getHoursColor(engineerHoursPct)}`}>
+                {project.engineerActualHours} / {project.engineerBudgetHours}{" "}
+                ({engineerHoursPct}%)
+              </span>
+            </div>
+            <div className="h-2 rounded-full bg-page overflow-hidden">
+              <div
+                className={`h-full rounded-full transition-all ${
+                  engineerHoursPct >= 100
+                    ? "bg-red-500"
+                    : engineerHoursPct >= 85
+                      ? "bg-amber-500"
+                      : "bg-accent"
+                }`}
+                style={{ width: `${Math.min(engineerHoursPct, 100)}%` }}
               />
             </div>
           </div>

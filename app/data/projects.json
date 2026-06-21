@@ -3,13 +3,16 @@
     "id": 1,
     "projectNumber": "24-1001",
     "name": "Main Street Gas Replacement",
-    "status": "In Progress",
+    "status": "final closeouts",
     "priority": "High",
     "dueDate": "2026-05-22",
     "budgetHours": 120,
     "actualHours": 78,
+    "engineerBudgetHours": 38,
+    "engineerActualHours": 25,
     "drafterId": 1,
-    "engineerId": 11
+    "engineerId": 11,
+    "notes": "Initial drafting in progress"
   },
   {
     "id": 2,
@@ -20,32 +23,41 @@
     "dueDate": "2026-05-18",
     "budgetHours": 60,
     "actualHours": 54,
+    "engineerBudgetHours": 19,
+    "engineerActualHours": 17,
     "drafterId": 1,
-    "engineerId": 12
+    "engineerId": 12,
+    "notes": "In QA review queue"
   },
   {
     "id": 3,
     "projectNumber": "24-1003",
     "name": "County Highway Relocation",
-    "status": "Pending Field Data",
+    "status": "Not started",
     "priority": "High",
     "dueDate": "2026-06-01",
     "budgetHours": 180,
     "actualHours": 92,
+    "engineerBudgetHours": 58,
+    "engineerActualHours": 30,
     "drafterId": 1,
-    "engineerId": 13
+    "engineerId": 13,
+    "notes": "On hold pending utility coordination"
   },
   {
     "id": 4,
     "projectNumber": "24-1004",
     "name": "River Bend Main Upgrade",
-    "status": "In Progress",
+    "status": "Preliminary",
     "priority": "Low",
     "dueDate": "2026-05-30",
     "budgetHours": 90,
     "actualHours": 32,
+    "engineerBudgetHours": 29,
+    "engineerActualHours": 10,
     "drafterId": 1,
-    "engineerId": 14
+    "engineerId": 14,
+    "notes": "Early layout review scheduled"
   },
   {
     "id": 5,
@@ -56,20 +68,26 @@
     "dueDate": "2026-05-14",
     "budgetHours": 140,
     "actualHours": 141,
+    "engineerBudgetHours": 45,
+    "engineerActualHours": 45,
     "drafterId": 2,
-    "engineerId": 15
+    "engineerId": 15,
+    "notes": "Closed out and filed"
   },
   {
     "id": 6,
     "projectNumber": "24-1006",
     "name": "Pine Valley Relight",
-    "status": "In Progress",
+    "status": "final closeouts",
     "priority": "High",
     "dueDate": "2026-05-27",
     "budgetHours": 110,
     "actualHours": 85,
+    "engineerBudgetHours": 35,
+    "engineerActualHours": 27,
     "drafterId": 2,
-    "engineerId": 16
+    "engineerId": 16,
+    "notes": "Last round of closeouts in progress"
   },
   {
     "id": 7,
@@ -80,68 +98,86 @@
     "dueDate": "2026-05-24",
     "budgetHours": 75,
     "actualHours": 68,
+    "engineerBudgetHours": 24,
+    "engineerActualHours": 22,
     "drafterId": 2,
-    "engineerId": 17
+    "engineerId": 17,
+    "notes": "QA review in progress"
   },
   {
     "id": 8,
     "projectNumber": "24-1008",
     "name": "North Side Integrity Check",
-    "status": "Pending Approval",
+    "status": "final closeouts",
     "priority": "Medium",
     "dueDate": "2026-06-03",
     "budgetHours": 55,
     "actualHours": 21,
+    "engineerBudgetHours": 18,
+    "engineerActualHours": 7,
     "drafterId": 2,
-    "engineerId": 18
+    "engineerId": 18,
+    "notes": "Finalizing sheet set"
   },
   {
     "id": 9,
     "projectNumber": "24-1009",
     "name": "Industrial Park Tie-In",
-    "status": "In Progress",
+    "status": "final closeouts",
     "priority": "High",
     "dueDate": "2026-05-25",
     "budgetHours": 200,
     "actualHours": 121,
+    "engineerBudgetHours": 64,
+    "engineerActualHours": 39,
     "drafterId": 3,
-    "engineerId": 19
+    "engineerId": 19,
+    "notes": "Final markup before QA submission"
   },
   {
     "id": 10,
     "projectNumber": "24-1010",
     "name": "Maple Street Service Work",
-    "status": "Drafting",
+    "status": "Preliminary",
     "priority": "Low",
     "dueDate": "2026-05-29",
     "budgetHours": 40,
     "actualHours": 12,
+    "engineerBudgetHours": 13,
+    "engineerActualHours": 4,
     "drafterId": 3,
-    "engineerId": 20
+    "engineerId": 20,
+    "notes": "Preliminary design underway"
   },
   {
     "id": 11,
     "projectNumber": "24-1011",
     "name": "East District Replacement",
-    "status": "In Progress",
+    "status": "1st round close outs",
     "priority": "High",
     "dueDate": "2026-06-05",
     "budgetHours": 210,
     "actualHours": 150,
+    "engineerBudgetHours": 67,
+    "engineerActualHours": 48,
     "drafterId": 3,
-    "engineerId": 11
+    "engineerId": 11,
+    "notes": "First closeout pass in progress"
   },
   {
     "id": 12,
     "projectNumber": "24-1012",
     "name": "Green Valley Extension",
-    "status": "Pending Field Data",
+    "status": "Not started",
     "priority": "Medium",
     "dueDate": "2026-06-07",
     "budgetHours": 95,
     "actualHours": 37,
+    "engineerBudgetHours": 30,
+    "engineerActualHours": 12,
     "drafterId": 3,
-    "engineerId": 12
+    "engineerId": 12,
+    "notes": "Waiting for easement approval"
   },
   {
     "id": 13,
@@ -152,56 +188,71 @@
     "dueDate": "2026-05-20",
     "budgetHours": 130,
     "actualHours": 126,
+    "engineerBudgetHours": 42,
+    "engineerActualHours": 41,
     "drafterId": 4,
-    "engineerId": 13
+    "engineerId": 13,
+    "notes": "Sent to QA"
   },
   {
     "id": 14,
     "projectNumber": "24-1014",
     "name": "Summit Drive Relocation",
-    "status": "Drafting",
+    "status": "Preliminary",
     "priority": "Medium",
     "dueDate": "2026-05-31",
     "budgetHours": 70,
     "actualHours": 18,
+    "engineerBudgetHours": 22,
+    "engineerActualHours": 6,
     "drafterId": 4,
-    "engineerId": 14
+    "engineerId": 14,
+    "notes": "Preliminary design underway"
   },
   {
     "id": 15,
     "projectNumber": "24-1015",
     "name": "Hillcrest Main Replacement",
-    "status": "In Progress",
+    "status": "final closeouts",
     "priority": "High",
     "dueDate": "2026-05-26",
     "budgetHours": 160,
     "actualHours": 101,
+    "engineerBudgetHours": 51,
+    "engineerActualHours": 32,
     "drafterId": 4,
-    "engineerId": 15
+    "engineerId": 15,
+    "notes": "Preparing package for QA review"
   },
   {
     "id": 16,
     "projectNumber": "24-1016",
     "name": "Downtown Service Batch",
-    "status": "Pending Approval",
+    "status": "final closeouts",
     "priority": "Low",
     "dueDate": "2026-06-08",
     "budgetHours": 50,
     "actualHours": 20,
+    "engineerBudgetHours": 16,
+    "engineerActualHours": 6,
     "drafterId": 4,
-    "engineerId": 16
+    "engineerId": 16,
+    "notes": "Finalizing sheet set"
   },
   {
     "id": 17,
     "projectNumber": "24-1017",
     "name": "Broadway Utility Coordination",
-    "status": "In Progress",
+    "status": "1st round close outs",
     "priority": "Medium",
     "dueDate": "2026-05-28",
     "budgetHours": 115,
     "actualHours": 64,
+    "engineerBudgetHours": 37,
+    "engineerActualHours": 21,
     "drafterId": 5,
-    "engineerId": 17
+    "engineerId": 17,
+    "notes": "Addressing first-round comments"
   },
   {
     "id": 18,
@@ -212,44 +263,56 @@
     "dueDate": "2026-05-19",
     "budgetHours": 145,
     "actualHours": 143,
+    "engineerBudgetHours": 46,
+    "engineerActualHours": 45,
     "drafterId": 5,
-    "engineerId": 18
+    "engineerId": 18,
+    "notes": "In QA review queue"
   },
   {
     "id": 19,
     "projectNumber": "24-1019",
     "name": "Lakeside Main Extension",
-    "status": "Drafting",
+    "status": "Preliminary",
     "priority": "Low",
     "dueDate": "2026-06-10",
     "budgetHours": 65,
     "actualHours": 9,
+    "engineerBudgetHours": 21,
+    "engineerActualHours": 3,
     "drafterId": 5,
-    "engineerId": 19
+    "engineerId": 19,
+    "notes": "Setting up base mapping"
   },
   {
     "id": 20,
     "projectNumber": "24-1020",
     "name": "Meadowbrook Service Renewal",
-    "status": "In Progress",
+    "status": "1st round close outs",
     "priority": "Medium",
     "dueDate": "2026-06-02",
     "budgetHours": 85,
     "actualHours": 49,
+    "engineerBudgetHours": 27,
+    "engineerActualHours": 16,
     "drafterId": 5,
-    "engineerId": 20
+    "engineerId": 20,
+    "notes": "Responding to internal review notes"
   },
   {
     "id": 21,
     "projectNumber": "24-1021",
     "name": "Airport Line Upgrade",
-    "status": "Pending Field Data",
+    "status": "Not started",
     "priority": "High",
     "dueDate": "2026-06-04",
     "budgetHours": 220,
     "actualHours": 111,
+    "engineerBudgetHours": 70,
+    "engineerActualHours": 35,
     "drafterId": 6,
-    "engineerId": 11
+    "engineerId": 11,
+    "notes": "Waiting on client documentation"
   },
   {
     "id": 22,
@@ -260,20 +323,26 @@
     "dueDate": "2026-05-15",
     "budgetHours": 45,
     "actualHours": 43,
+    "engineerBudgetHours": 14,
+    "engineerActualHours": 13,
     "drafterId": 6,
-    "engineerId": 12
+    "engineerId": 12,
+    "notes": "Project complete"
   },
   {
     "id": 23,
     "projectNumber": "24-1023",
     "name": "Central District Audit",
-    "status": "In Progress",
+    "status": "1st round close outs",
     "priority": "Medium",
     "dueDate": "2026-05-23",
     "budgetHours": 100,
     "actualHours": 56,
+    "engineerBudgetHours": 32,
+    "engineerActualHours": 18,
     "drafterId": 6,
-    "engineerId": 13
+    "engineerId": 13,
+    "notes": "First closeout pass in progress"
   },
   {
     "id": 24,
@@ -284,68 +353,86 @@
     "dueDate": "2026-05-21",
     "budgetHours": 175,
     "actualHours": 169,
+    "engineerBudgetHours": 56,
+    "engineerActualHours": 54,
     "drafterId": 6,
-    "engineerId": 14
+    "engineerId": 14,
+    "notes": "Awaiting QA sign-off"
   },
   {
     "id": 25,
     "projectNumber": "24-1025",
     "name": "Valley Creek Reinforcement",
-    "status": "Drafting",
+    "status": "Preliminary",
     "priority": "Medium",
     "dueDate": "2026-06-09",
     "budgetHours": 80,
     "actualHours": 26,
+    "engineerBudgetHours": 26,
+    "engineerActualHours": 8,
     "drafterId": 7,
-    "engineerId": 15
+    "engineerId": 15,
+    "notes": "Initial drafting in progress"
   },
   {
     "id": 26,
     "projectNumber": "24-1026",
     "name": "Harbor View Main Extension",
-    "status": "In Progress",
+    "status": "1st round close outs",
     "priority": "High",
     "dueDate": "2026-06-11",
     "budgetHours": 125,
     "actualHours": 44,
+    "engineerBudgetHours": 40,
+    "engineerActualHours": 14,
     "drafterId": 7,
-    "engineerId": 16
+    "engineerId": 16,
+    "notes": "Incorporating engineer redlines"
   },
   {
     "id": 27,
     "projectNumber": "24-1027",
     "name": "Sunset Ridge Service Loop",
-    "status": "Drafting",
+    "status": "Preliminary",
     "priority": "Medium",
     "dueDate": "2026-06-12",
     "budgetHours": 88,
     "actualHours": 15,
+    "engineerBudgetHours": 28,
+    "engineerActualHours": 5,
     "drafterId": 7,
-    "engineerId": 17
+    "engineerId": 17,
+    "notes": "Setting up base mapping"
   },
   {
     "id": 28,
     "projectNumber": "24-1028",
     "name": "Quarry Road Reinforcement",
-    "status": "Pending Field Data",
+    "status": "Not started",
     "priority": "High",
     "dueDate": "2026-06-13",
     "budgetHours": 195,
     "actualHours": 72,
+    "engineerBudgetHours": 62,
+    "engineerActualHours": 23,
     "drafterId": 7,
-    "engineerId": 18
+    "engineerId": 18,
+    "notes": "Waiting for easement approval"
   },
   {
     "id": 29,
     "projectNumber": "24-1029",
     "name": "Willow Creek Tie-In",
-    "status": "In Progress",
+    "status": "1st round close outs",
     "priority": "Low",
     "dueDate": "2026-06-14",
     "budgetHours": 52,
     "actualHours": 28,
+    "engineerBudgetHours": 17,
+    "engineerActualHours": 9,
     "drafterId": 8,
-    "engineerId": 19
+    "engineerId": 19,
+    "notes": "Addressing first-round comments"
   },
   {
     "id": 30,
@@ -356,56 +443,71 @@
     "dueDate": "2026-06-15",
     "budgetHours": 98,
     "actualHours": 91,
+    "engineerBudgetHours": 31,
+    "engineerActualHours": 29,
     "drafterId": 8,
-    "engineerId": 20
+    "engineerId": 20,
+    "notes": "In QA review queue"
   },
   {
     "id": 31,
     "projectNumber": "24-1031",
     "name": "Forest Hills Main Upgrade",
-    "status": "In Progress",
+    "status": "Preliminary",
     "priority": "High",
     "dueDate": "2026-06-16",
     "budgetHours": 170,
     "actualHours": 103,
+    "engineerBudgetHours": 54,
+    "engineerActualHours": 33,
     "drafterId": 8,
-    "engineerId": 11
+    "engineerId": 11,
+    "notes": "Setting up base mapping"
   },
   {
     "id": 32,
     "projectNumber": "24-1032",
     "name": "Commerce Park Service Work",
-    "status": "Pending Approval",
+    "status": "final closeouts",
     "priority": "Medium",
     "dueDate": "2026-06-17",
     "budgetHours": 62,
     "actualHours": 19,
+    "engineerBudgetHours": 20,
+    "engineerActualHours": 6,
     "drafterId": 8,
-    "engineerId": 12
+    "engineerId": 12,
+    "notes": "Finalizing sheet set"
   },
   {
     "id": 33,
     "projectNumber": "24-1033",
     "name": "Ridgeview Pressure Study",
-    "status": "Drafting",
+    "status": "Preliminary",
     "priority": "Low",
     "dueDate": "2026-06-18",
     "budgetHours": 48,
     "actualHours": 8,
+    "engineerBudgetHours": 15,
+    "engineerActualHours": 3,
     "drafterId": 9,
-    "engineerId": 13
+    "engineerId": 13,
+    "notes": "Initial drafting in progress"
   },
   {
     "id": 34,
     "projectNumber": "24-1034",
     "name": "Gateway District Renewal",
-    "status": "In Progress",
+    "status": "Preliminary",
     "priority": "High",
     "dueDate": "2026-06-19",
     "budgetHours": 155,
     "actualHours": 88,
+    "engineerBudgetHours": 50,
+    "engineerActualHours": 28,
     "drafterId": 9,
-    "engineerId": 14
+    "engineerId": 14,
+    "notes": "Preliminary design underway"
   },
   {
     "id": 35,
@@ -416,56 +518,71 @@
     "dueDate": "2026-06-20",
     "budgetHours": 72,
     "actualHours": 66,
+    "engineerBudgetHours": 23,
+    "engineerActualHours": 21,
     "drafterId": 9,
-    "engineerId": 15
+    "engineerId": 15,
+    "notes": "QA review in progress"
   },
   {
     "id": 36,
     "projectNumber": "24-1036",
     "name": "Transit Corridor Upgrade",
-    "status": "Pending Field Data",
+    "status": "Not started",
     "priority": "High",
     "dueDate": "2026-06-21",
     "budgetHours": 205,
     "actualHours": 97,
+    "engineerBudgetHours": 66,
+    "engineerActualHours": 31,
     "drafterId": 9,
-    "engineerId": 16
+    "engineerId": 16,
+    "notes": "Waiting for easement approval"
   },
   {
     "id": 37,
     "projectNumber": "24-1037",
     "name": "Milltown Service Batch",
-    "status": "In Progress",
+    "status": "Preliminary",
     "priority": "Low",
     "dueDate": "2026-06-22",
     "budgetHours": 58,
     "actualHours": 31,
+    "engineerBudgetHours": 19,
+    "engineerActualHours": 10,
     "drafterId": 10,
-    "engineerId": 17
+    "engineerId": 17,
+    "notes": "Initial drafting in progress"
   },
   {
     "id": 38,
     "projectNumber": "24-1038",
     "name": "Highland Park Tie-In",
-    "status": "Drafting",
+    "status": "Preliminary",
     "priority": "Medium",
     "dueDate": "2026-06-23",
     "budgetHours": 76,
     "actualHours": 14,
+    "engineerBudgetHours": 24,
+    "engineerActualHours": 4,
     "drafterId": 10,
-    "engineerId": 18
+    "engineerId": 18,
+    "notes": "Preliminary design underway"
   },
   {
     "id": 39,
     "projectNumber": "24-1039",
     "name": "Warehouse District Main",
-    "status": "In Progress",
+    "status": "final closeouts",
     "priority": "High",
     "dueDate": "2026-06-24",
     "budgetHours": 188,
     "actualHours": 122,
+    "engineerBudgetHours": 60,
+    "engineerActualHours": 39,
     "drafterId": 10,
-    "engineerId": 19
+    "engineerId": 19,
+    "notes": "Preparing package for QA review"
   },
   {
     "id": 40,
@@ -476,7 +593,10 @@
     "dueDate": "2026-06-25",
     "budgetHours": 92,
     "actualHours": 90,
+    "engineerBudgetHours": 29,
+    "engineerActualHours": 28,
     "drafterId": 10,
-    "engineerId": 20
+    "engineerId": 20,
+    "notes": "Final package delivered"
   }
 ]
