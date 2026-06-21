@@ -107,22 +107,16 @@ export default async function ProjectPage({
         <div className="app-panel space-y-5">
           <h2 className="text-2xl font-semibold">Project Details</h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <DetailField label="Drafter">
               {drafterForProject(project)}
             </DetailField>
             <DetailField label="Engineer">
               {engineerForProject(project)}
             </DetailField>
-            <DetailField label="Status">
-              <ProjectStatusSelect
-                key={project.status}
-                projectId={project.id}
-                status={project.status}
-                className="w-full sm:w-auto min-w-[12rem]"
-              />
+            <DetailField label="Due Date">
+              {formatDueDate(project.dueDate)}
             </DetailField>
-
             <DetailField label="Priority">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-xs border ${getPriorityColor(
@@ -132,9 +126,14 @@ export default async function ProjectPage({
                 {project.priority}
               </span>
             </DetailField>
-            <DetailField label="Due Date">
-              {formatDueDate(project.dueDate)}
-            </DetailField>
+            <DetailField label="Status">
+              <ProjectStatusSelect
+                key={project.status}
+                projectId={project.id}
+                status={project.status}
+                className="w-full sm:w-auto min-w-[12rem]"
+              />
+            </DetailField>            
             <DetailField label="Drafter Remaining Hours">
               {remainingHours}
             </DetailField>
