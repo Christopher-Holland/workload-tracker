@@ -10,8 +10,10 @@ import {
   engineerForProject,
 } from "@/app/components/projectAssignments";
 import { getProjectById } from "@/app/lib/projects";
-import { formatDueDate } from "@/app/lib/dates";
+import { formatDueDate, formatTimestamp } from "@/app/lib/dates";
+import { getStatusColor } from "@/app/components/getStatusColor";
 import ProjectStatusSelect from "@/app/components/projectStatusSelect";
+import type { ProjectStatus } from "@/app/lib/projectStatuses";
 
 function DetailField({
   label,
@@ -55,6 +57,9 @@ export default async function ProjectPage({
   const remainingEngineerHours = Math.max(
     project.engineerBudgetHours - project.engineerActualHours,
     0
+  );
+  const statusHistory = [...(project.statusHistory ?? [])].sort(
+    (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
   );
 
   return (
@@ -128,12 +133,17 @@ export default async function ProjectPage({
             </DetailField>
             <DetailField label="Status">
               <ProjectStatusSelect
-                key={project.status}
+                key={project.statusUpdatedAt}
                 projectId={project.id}
-                status={project.status}
+                status={project.status as ProjectStatus}
                 className="w-full sm:w-auto min-w-[12rem]"
               />
-            </DetailField>            
+            </DetailField>
+            <DetailField label="Status Updated">
+              {project.statusUpdatedAt
+                ? formatTimestamp(project.statusUpdatedAt)
+                : "—"}
+            </DetailField>
             <DetailField label="Drafter Remaining Hours">
               {remainingHours}
             </DetailField>
@@ -141,6 +151,31 @@ export default async function ProjectPage({
               {remainingEngineerHours}
             </DetailField>
           </div>
+
+          {statusHistory.length > 0 && (
+            <div className="app-surface-card p-4">
+              <p className="text-sm text-muted mb-3">Status History</p>
+              <ul className="space-y-2">
+                {statusHistory.map((entry, index) => (
+                  <li
+                    key={`${entry.status}-${entry.updatedAt}-${index}`}
+                    className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 text-sm border-b border-border pb-2 last:border-0 last:pb-0"
+                  >
+                    <span
+                      className={`inline-block w-fit px-3 py-1 rounded-full text-xs border ${getStatusColor(
+                        entry.status
+                      )}`}
+                    >
+                      {entry.status}
+                    </span>
+                    <span className="text-muted">
+                      {formatTimestamp(entry.updatedAt)}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {project.notes && (
             <div className="app-surface-card p-4">

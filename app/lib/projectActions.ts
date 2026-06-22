@@ -23,7 +23,28 @@ export async function updateProjectStatus(
     return { success: false };
   }
 
-  const updated: Project = { ...projects[index], status };
+  const current = projects[index];
+
+  if (current.status === status) {
+    return { success: true };
+  }
+
+  const updatedAt = new Date().toISOString();
+  const historyEntry = { status, updatedAt };
+  const existingHistory = current.statusHistory ?? [
+    {
+      status: current.status,
+      updatedAt: current.statusUpdatedAt ?? updatedAt,
+    },
+  ];
+
+  const updated: Project = {
+    ...current,
+    status,
+    statusUpdatedAt: updatedAt,
+    statusHistory: [...existingHistory, historyEntry],
+  };
+
   projects[index] = updated;
   writeProjects(projects);
 

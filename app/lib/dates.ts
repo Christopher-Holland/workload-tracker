@@ -24,3 +24,17 @@ export function formatDueDate(dateStr: string): string {
 
   return `${month}-${day}-${year}`;
 }
+
+/** Format an ISO timestamp for display (e.g. status changes). */
+export function formatTimestamp(isoString: string): string {
+  const date = new Date(isoString);
+  if (isNaN(date.getTime())) return isoString;
+
+  return date.toLocaleString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}

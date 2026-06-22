@@ -4,6 +4,8 @@ export function getStatusColor(status: string): string {
       return "bg-zinc-500/20 text-zinc-300 border-zinc-500/30";
     case "Preliminary":
       return "bg-violet-500/20 text-violet-300 border-violet-500/30";
+    case "Preliminary Complete":
+      return "bg-indigo-500/20 text-indigo-300 border-indigo-500/30";
     case "1st round close outs":
       return "bg-blue-500/20 text-blue-300 border-blue-500/30";
     case "final closeouts":

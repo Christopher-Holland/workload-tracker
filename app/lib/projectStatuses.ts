@@ -3,6 +3,7 @@ import type { Project } from "@/app/components/projectAssignments";
 export const PROJECT_STATUSES = [
   "Not started",
   "Preliminary",
+  "Preliminary Complete",
   "1st round close outs",
   "final closeouts",
   "QA Review",

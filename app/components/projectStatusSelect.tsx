@@ -4,12 +4,16 @@ import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 //import { getStatusColor } from "@/app/components/getStatusColor";
 import type { Project } from "@/app/components/projectAssignments";
-import { PROJECT_STATUSES } from "@/app/lib/projectStatuses";
+import {
+  PROJECT_STATUSES,
+  type ProjectStatus,
+  isProjectStatus,
+} from "@/app/lib/projectStatuses";
 import { updateProjectStatus } from "@/app/lib/projectActions";
 
 type ProjectStatusSelectProps = {
   projectId: number;
-  status: Project["status"];
+  status: ProjectStatus;
   className?: string;
 };
 
@@ -23,7 +27,9 @@ export default function ProjectStatusSelect({
   const router = useRouter();
 
   function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const nextStatus = event.target.value as Project["status"];
+    const nextStatus = event.target.value;
+    if (!isProjectStatus(nextStatus)) return;
+
     const previousStatus = status;
 
     setStatus(nextStatus);
