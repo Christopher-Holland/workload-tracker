@@ -49,7 +49,7 @@
     "id": 2,
     "projectNumber": "24-1002",
     "name": "Oakwood Service Transfer",
-    "status": "QA Review",
+    "status": "final closeouts",
     "priority": "Medium",
     "dueDate": "2026-05-18",
     "budgetHours": 60,
@@ -58,12 +58,16 @@
     "engineerActualHours": 17,
     "drafterId": 1,
     "engineerId": 12,
-    "notes": "In QA review queue",
-    "statusUpdatedAt": "2026-05-18T12:00:00.000Z",
+    "notes": "In QA review queue\nTesting notes",
+    "statusUpdatedAt": "2026-07-19T17:42:56.300Z",
     "statusHistory": [
       {
         "status": "QA Review",
         "updatedAt": "2026-05-18T12:00:00.000Z"
+      },
+      {
+        "status": "final closeouts",
+        "updatedAt": "2026-07-19T17:42:56.300Z"
       }
     ]
   },

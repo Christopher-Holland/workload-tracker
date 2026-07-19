@@ -11,6 +11,7 @@ import {
   getHoursEditPermissions,
 } from "@/app/components/projectAssignments";
 import ProjectHoursEditor from "@/app/components/projectHoursEditor";
+import ProjectNotesEditor from "@/app/components/projectNotesEditor";
 import ProjectStatusSelect from "@/app/components/projectStatusSelect";
 import { getStatusColor } from "@/app/components/getStatusColor";
 import { getCurrentUser } from "@/app/lib/currentUser";
@@ -180,12 +181,11 @@ export default async function ProjectPage({
             </div>
           )}
 
-          {project.notes && (
-            <div className="app-surface-card p-4">
-              <p className="text-sm text-muted mb-1">Notes</p>
-              <p className="text-foreground">{project.notes}</p>
-            </div>
-          )}
+          <ProjectNotesEditor
+            key={project.notes ?? ""}
+            projectId={project.id}
+            notes={project.notes ?? ""}
+          />
 
           <ProjectHoursEditor
             key={`${project.actualHours}-${project.engineerActualHours}`}

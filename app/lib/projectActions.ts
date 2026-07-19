@@ -12,6 +12,13 @@ import {
   type ProjectStatus,
 } from "@/app/lib/projectStatuses";
 
+function revalidateProjectPaths(projectId: number) {
+  revalidatePath("/projects");
+  revalidatePath(`/projects/${projectId}`);
+  revalidatePath("/workload");
+  revalidatePath("/");
+}
+
 export async function updateProjectStatus(
   projectId: number,
   status: ProjectStatus
@@ -51,11 +58,7 @@ export async function updateProjectStatus(
 
   projects[index] = updated;
   writeProjects(projects);
-
-  revalidatePath("/projects");
-  revalidatePath(`/projects/${projectId}`);
-  revalidatePath("/workload");
-  revalidatePath("/");
+  revalidateProjectPaths(projectId);
 
   return { success: true };
 }
@@ -143,11 +146,37 @@ export async function updateProjectHours(
 
   projects[index] = updated;
   writeProjects(projects);
+  revalidateProjectPaths(projectId);
 
-  revalidatePath("/projects");
-  revalidatePath(`/projects/${projectId}`);
-  revalidatePath("/workload");
-  revalidatePath("/");
+  return { success: true };
+}
+
+export async function updateProjectNotes(
+  projectId: number,
+  notes: string
+): Promise<{ success: boolean; error?: string }> {
+  const projects = readProjects();
+  const index = projects.findIndex((project) => project.id === projectId);
+
+  if (index === -1) {
+    return { success: false, error: "Project not found." };
+  }
+
+  const current = projects[index];
+  const nextNotes = notes.trim();
+
+  if (nextNotes === (current.notes ?? "")) {
+    return { success: true };
+  }
+
+  const updated: Project = {
+    ...current,
+    notes: nextNotes,
+  };
+
+  projects[index] = updated;
+  writeProjects(projects);
+  revalidateProjectPaths(projectId);
 
   return { success: true };
 }
