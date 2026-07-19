@@ -8,11 +8,14 @@ import { getPriorityColor } from "@/app/components/getPriorityColor";
 import {
   drafterForProject,
   engineerForProject,
+  getHoursEditPermissions,
 } from "@/app/components/projectAssignments";
-import { getProjectById } from "@/app/lib/projects";
-import { formatDueDate, formatTimestamp } from "@/app/lib/dates";
-import { getStatusColor } from "@/app/components/getStatusColor";
+import ProjectHoursEditor from "@/app/components/projectHoursEditor";
 import ProjectStatusSelect from "@/app/components/projectStatusSelect";
+import { getStatusColor } from "@/app/components/getStatusColor";
+import { getCurrentUser } from "@/app/lib/currentUser";
+import { formatDueDate, formatTimestamp } from "@/app/lib/dates";
+import { getProjectById } from "@/app/lib/projects";
 import type { ProjectStatus } from "@/app/lib/projectStatuses";
 
 function DetailField({
@@ -48,11 +51,11 @@ export default async function ProjectPage({
     notFound();
   }
 
+  const user = getCurrentUser();
+  const { canEditDrafterHours, canEditEngineerHours } =
+    getHoursEditPermissions(user, project);
+
   const hoursPct = getHoursPct(project.actualHours, project.budgetHours);
-  const engineerHoursPct = getHoursPct(
-    project.engineerActualHours,
-    project.engineerBudgetHours
-  );
   const remainingHours = Math.max(project.budgetHours - project.actualHours, 0);
   const remainingEngineerHours = Math.max(
     project.engineerBudgetHours - project.engineerActualHours,
@@ -184,48 +187,16 @@ export default async function ProjectPage({
             </div>
           )}
 
-          <div className="app-surface-card p-4">
-            <div className="flex items-center justify-between text-sm mb-2">
-              <span className="text-muted">Drafter Hours Progress</span>
-              <span className={`font-medium ${getHoursColor(hoursPct)}`}>
-                {project.actualHours} / {project.budgetHours} ({hoursPct}%)
-              </span>
-            </div>
-            <div className="h-2 rounded-full bg-page overflow-hidden">
-              <div
-                className={`h-full rounded-full transition-all ${
-                  hoursPct >= 100
-                    ? "bg-red-500"
-                    : hoursPct >= 85
-                      ? "bg-amber-500"
-                      : "bg-accent"
-                }`}
-                style={{ width: `${Math.min(hoursPct, 100)}%` }}
-              />
-            </div>
-          </div>
-
-          <div className="app-surface-card p-4">
-            <div className="flex items-center justify-between text-sm mb-2">
-              <span className="text-muted">Engineer Hours Progress</span>
-              <span className={`font-medium ${getHoursColor(engineerHoursPct)}`}>
-                {project.engineerActualHours} / {project.engineerBudgetHours}{" "}
-                ({engineerHoursPct}%)
-              </span>
-            </div>
-            <div className="h-2 rounded-full bg-page overflow-hidden">
-              <div
-                className={`h-full rounded-full transition-all ${
-                  engineerHoursPct >= 100
-                    ? "bg-red-500"
-                    : engineerHoursPct >= 85
-                      ? "bg-amber-500"
-                      : "bg-accent"
-                }`}
-                style={{ width: `${Math.min(engineerHoursPct, 100)}%` }}
-              />
-            </div>
-          </div>
+          <ProjectHoursEditor
+            key={`${project.actualHours}-${project.engineerActualHours}`}
+            projectId={project.id}
+            actualHours={project.actualHours}
+            budgetHours={project.budgetHours}
+            engineerActualHours={project.engineerActualHours}
+            engineerBudgetHours={project.engineerBudgetHours}
+            canEditDrafterHours={canEditDrafterHours}
+            canEditEngineerHours={canEditEngineerHours}
+          />
         </div>
       </div>
     </div>

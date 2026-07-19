@@ -3,17 +3,17 @@
     "id": 1,
     "projectNumber": "24-1001",
     "name": "Main Street Gas Replacement",
-    "status": "Not started",
+    "status": "1st round close outs",
     "priority": "High",
     "dueDate": "2026-05-22",
     "budgetHours": 120,
-    "actualHours": 78,
+    "actualHours": 75,
     "engineerBudgetHours": 38,
     "engineerActualHours": 25,
     "drafterId": 1,
     "engineerId": 11,
     "notes": "Initial drafting in progress",
-    "statusUpdatedAt": "2026-06-22T00:34:12.348Z",
+    "statusUpdatedAt": "2026-07-19T15:40:28.932Z",
     "statusHistory": [
       {
         "status": "Preliminary",
@@ -38,6 +38,10 @@
       {
         "status": "Not started",
         "updatedAt": "2026-06-22T00:34:12.348Z"
+      },
+      {
+        "status": "1st round close outs",
+        "updatedAt": "2026-07-19T15:40:28.932Z"
       }
     ]
   },

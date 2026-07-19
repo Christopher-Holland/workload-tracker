@@ -1,7 +1,7 @@
 import users from "@/app/data/users.json";
 
 /** Logged-in user id (prototype — replace with auth/session later). */
-export const CURRENT_USER_ID = 1;
+export const CURRENT_USER_ID = 12;
 
 export type User = (typeof users)[number];
 
